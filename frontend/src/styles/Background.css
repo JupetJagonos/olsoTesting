@@ -1,0 +1,51 @@
+:root {
+    --primary-100: #4B5320; /* Dark Olive Green */
+    --primary-200: #787f4a; /* Olive Drab */
+    --primary-300: #dae0a5; /* Light Olive/Light Green */
+    --accent-100: #000000; /* Black */
+    --accent-200: #818181; /* Gray */
+    --text-100: #4b4b4b; /* Dark Gray */
+    --text-200: #777777; /* Gray */
+    --bg-100: #ebebeb; /* Very Light Gray */
+    --bg-200: #e1e1e1; /* Light Gray */
+    --bg-300: #b9b9b9; /* Medium Gray */
+}
+
+.background-container {
+    width: 100vw; /* Full viewport width */
+    height: relative; /* Full viewport height */
+    position: relative; /* Position absolutely to cover the parent */
+    top: 0; /* Align to the top */
+    left: 0; /* Align to the left */
+    z-index: -1; /* Keep it behind other content */
+ 
+    background: linear-gradient(
+        -45deg,
+        var(--primary-100),
+        var(--primary-200),
+        var(--primary-300),
+        var(--bg-200),
+        var(--accent-200),
+        var(--bg-100)
+    );
+    background-size: 400% 400%; /* Allows for animation effects */
+    animation: gradient 30s ease infinite; /* Animation for the gradient */
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    25% {
+        background-position: 50% 100%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    75% {
+        background-position: 50% 0%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}

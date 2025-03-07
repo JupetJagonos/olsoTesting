@@ -1,0 +1,69 @@
+.service-form {
+    max-width: 500px; /* Maximum width for the form */
+    margin: 100px auto; /* Center the form horizontally and add space from top and bottom */
+    padding: 50px; /* Padding around the form */
+    background-color: #171717; /* Background color */
+    border-radius: 25px; /* Rounded corners */
+    box-shadow: 15px 15px 30px rgba(66, 63, 63, 0.3), -15px -15px 30px #ffffff; /* Shadow effect for depth */
+}
+
+h2 {
+    text-align: center; /* Center the heading */
+    margin-bottom: 20px; /* Space below the heading */
+    color: white; /* Heading color */
+}
+
+.field {
+    border-radius: 25px; /* Rounded corners for fields */
+    padding: 0.6em; /* Padding for fields */
+    border: none; /* Remove default border */
+    outline: none; /* Remove outline */
+    color: white; /* Text color */
+    background-color: #252525; /* Dark background for input fields */
+    box-shadow: inset 2px 5px 10px rgba(0, 0, 0, 0.5); /* Inner shadow for depth */
+}
+
+.input-field, textarea {
+    background: none; /* Remove background */
+    border: none; /* Remove border */
+    outline: none; /* Remove outline */
+    width: 100%; /* Full width */
+    color: #d3d3d3; /* Input text color */
+    resize: none; /* Prevent textarea resizing */
+}
+
+textarea {
+    min-height: 100px; /* Minimum height for the description textarea */
+}
+
+.btn {
+    display: flex;
+    justify-content: center; /* Center button */
+}
+
+.button2 {
+    padding: 10px 20px; /* Padding for button */
+    border-radius: 5px; /* Rounded corners */
+    border: none; /* Remove border */
+    outline: none; /* Remove outline */
+    background-color: #4B5320; /* Olive Green for button background */
+    color: white; /* Button text color */
+    transition: background-color 0.4s ease-in-out; /* Transition for hover effect */
+    cursor: pointer; /* Pointer cursor for button */
+}
+
+.button2:hover {
+    background-color: #3F4B20; /* Darker shade on hover */
+}
+
+.error {
+    color: red; /* Error message color */
+    margin-bottom: 10px; /* Space below error message */
+    text-align: center; /* Center error message */
+}
+
+.success {
+    color: green; /* Success message color */
+    margin-bottom: 10px; /* Space below success message */
+    text-align: center; /* Center success message */
+}
