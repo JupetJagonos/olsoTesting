@@ -1,0 +1,64 @@
+.registration-container {
+    max-width: 400px; /* Maximum width for the form */
+    margin: 100px auto; /* Center the form horizontally and add space from top and bottom */
+    padding: 50px; /* Padding around the form */
+    background-color: #171717; /* Background color */
+    border-radius: 25px; /* Rounded corners */
+    box-shadow: 15px 15px 30px #423f3f, -15px -15px 30px #ffffff;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); Shadow effect */
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: white; /* Heading color */
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Gap between fields */
+}
+
+.field {
+    border-radius: 25px; /* Rounded corners for fields */
+    padding: 0.6em; /* Padding for fields */
+    border: none; /* Remove default border */
+    outline: none; /* Remove outline */
+    color: white; /* Text color */
+    background-color: #171717; /* Field background color */
+    box-shadow: inset 2px 5px 10px rgba(0, 0, 0, 0.5); /* Inner shadow for depth */
+}
+
+.input-field {
+    background: none; /* Remove background */
+    border: none; /* Remove border */
+    outline: none; /* Remove outline */
+    width: 100%; /* Full width */
+    color: #d3d3d3; /* Input text color */
+}
+
+.btn {
+    display: flex;
+    justify-content: center; /* Center button */
+}
+
+.button2 {
+    padding: 10px 20px; /* Padding for button */
+    border-radius: 5px; /* Rounded corners */
+    border: none; /* Remove border */
+    outline: none; /* Remove outline */
+    background-color: #252525; /* Button background */
+    color: white; /* Button text color */
+    transition: 0.4s ease-in-out; /* Transition for hover effect */
+}
+
+.button2:hover {
+    background-color: black; /* Change background on hover */
+}
+
+.error {
+    color: red; /* Error message color */
+    margin-bottom: 10px;
+    text-align: center; /* Center error message */
+}

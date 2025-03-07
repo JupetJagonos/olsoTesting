@@ -1,0 +1,15 @@
+.service-detail-container {
+    padding: 20px; 
+    background-color: #f8f9fa; /* Light background for contrast */
+    border-radius: 20px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+}
+
+h1 {
+    text-align: center;
+    color: #333;  /* Dark text color */
+}
+
+p {
+    margin-bottom: 10px; /* Spacing between paragraphs */
+}

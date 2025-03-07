@@ -1,0 +1,93 @@
+
+body {
+    font-family: 'Helvetica', sans-serif; /* Font family */
+    background-color: #ebebeb; /* Background color */
+    color: #4B4B4B; /* Default text color */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+
+header {
+    background-color: #4B5320; /* Header background color */
+    color: #ffffff; /* Header text color */
+}
+
+footer {
+    background-color: #787f4a; /* Footer background color */
+    color: #ffffff; /* Footer text color */
+}
+
+/* Buttons */
+.btn {
+    background-color: #dae0a5; /* Button background */
+    color: #4B4B4B; /* Button text color */
+    border: none; /* Remove border */
+    padding: 10px 20px; /* Button padding */
+    border-radius: 5px; /* Button border radius */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Transition effect */
+}
+
+.btn:hover {
+    background-color: #4B5320; /* Button hover background color */
+    color: #ffffff; /* Button hover text color */
+}
+
+/* Form Styles for Registration */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between form fields */
+    padding: 20px; /* Padding inside form */
+    background-color: #171717; /* Background of form */
+    border-radius: 25px; /* Rounded corners */
+    transition: 0.4s ease-in-out; /* Transition effect */
+}
+
+.form:hover {
+    transform: scale(1.05); /* Scale effect on hover */
+    border: 1px solid black; /* Border effect on hover */
+}
+
+.field {
+    border-radius: 25px; /* Rounded corners for input fields */
+    padding: 0.6em; /* Padding inside fields */
+    border: none; /* Remove default border */
+    outline: none; /* Remove outline */
+    color: white; /* Text color */
+    background-color: #171717; /* Field background color */
+    box-shadow: inset 2px 5px 10px rgb(5, 5, 5); /* Inner shadow for depth */
+}
+
+.input-field {
+    background: none; /* No background */
+    border: none; /* No border */
+    outline: none; /* No outline */
+    width: 100%; /* Full width */
+    color: #d3d3d3; /* Input text color */
+}
+
+/* Centering links */
+a {
+    color: #4B5320; /* Link color */
+    text-decoration: none; /* Remove underline */
+}
+
+a:hover {
+    color: #787f4a; /* Link color on hover */
+}
+
+h1, h2, h3 {
+    color: #4B4B4B; /* Standard text color for headings */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .service-card {
+        margin: 10px 0; /* Reduce margin for smaller screens */
+    }
+    
+    header, footer {
+        text-align: center; /* Center header and footer text */
+    }
+}

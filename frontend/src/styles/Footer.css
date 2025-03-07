@@ -1,0 +1,90 @@
+:root {
+    --primary-100: #4B5320; /* Dark Olive Green */
+    --primary-200: #787f4a; /* Olive Drab */
+    --primary-300: #dae0a5; /* Light Olive/Light Green */
+    --accent-100: #000000; /* Black */
+    --accent-200: #818181; /* Gray */
+    --text-100: #4b4b4b; /* Dark Gray */
+    --text-200: #e1e1e1; /* Light Gray for text */
+    --bg-100: #ebebeb; /* Very Light Gray */
+    --bg-200: #4b5320; /* Same as the dark olive green for footer's background */
+}
+
+footer {
+    background-color: rgba(75, 83, 32, 0.7); /* Semi-transparent Dark Olive Green */
+    height: 280px; /* Set the height of the navbar */
+    z-index: 9998;
+    backdrop-filter: blur(10px); /* Add a blur effect */
+    color: #ffffff; /* Text color */
+}
+
+.container {
+    display: grid; /* Use grid layout */
+    grid-template-columns: 1fr; /* Single column on small screens */
+    gap: 20px; /* Gap between grid items */
+    max-width: 1200px; /* Optional: set a max width for large screens */
+    margin: 0 auto; /* Center the container */
+}
+
+@media (min-width: 768px) {
+    .container {
+        grid-template-columns: repeat(4, 1fr); /* Four columns on medium screens */
+    }
+}
+
+h2 {
+    color: var(--text-100); /* Ensure headers in footer use a consistent text color */
+    margin-bottom: 10px; /* Add some spacing below headers */
+}
+
+.quicklinks {
+    color: var(--text-200); /* Set link color to a light gray */
+    transition: color 0.3s; /* Transition for hover effect */
+}
+
+.quicklinks a {
+    color: var(--text-200); /* Ensure link color */
+}
+
+.quicklinks a:hover {
+    color: #dae0a5; /* Change link color to light olive on hover */
+}
+
+.btn-primary {
+    background-image: linear-gradient(135deg, var(--primary-300) 0%, var(--primary-200) 100%);
+    color: white; /* White text on button */
+    border: none; /* Remove default border */
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-100); /* Dark Olive Green on hover */
+}
+
+input[type="email"] {
+    padding: 10px; /* Padding for the email input */
+    border: 1px solid var(--accent-200); /* Gray border */
+    border-radius: 5px; /* Rounded edges to match buttons */
+    margin-bottom: 10px; /* Margin for spacing */
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column; /* Vertical layout for links */
+    gap: 5px; /* Spacing between each link */
+}
+
+.footer-social-icons {
+    display: flex; /* Use flex for social icons */
+    gap: 15px; /* Spacing between icons */
+}
+
+.size-6 {
+    font-size: 1.5rem; /* Adjust size of icons */
+    color: var(--text-200); /* Use footer text color */
+}
+
+.copyright {
+    text-align: center; /* Center text */
+    color: var(--text-200); /* Match copyright text color */
+    margin-top: 20px; /* Add spacing above this section */
+}

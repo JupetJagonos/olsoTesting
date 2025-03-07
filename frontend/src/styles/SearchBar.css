@@ -1,0 +1,23 @@
+
+.search-bar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.search-bar-container .input {
+  border: none;
+  border-radius: 15px;
+  padding: 15px;
+  background-color: #e8e8e8;
+  box-shadow: 6px 6px 12px #ffffff, -6px -6px 12px #c5c5c5;
+  font-size: medium;
+  font-weight: bold;
+  max-width: 200px;
+}
+
+.search-bar-container .input:focus {
+  outline: none; /* You can change this but keep it focused for better UX */
+  outline-color: white;
+}

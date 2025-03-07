@@ -1,0 +1,133 @@
+.service-card-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns */
+    gap: 10px; /* Set a small gap between cards */
+    justify-items: center; /* Center the cards within each grid cell */
+    align-items: start; /* Align to the start at the top instead of centered */
+    padding: 0; /* No padding around the container */
+    margin: 0 auto; /* Center the grid container on the page */
+    max-width: 90%; /* Optionally set a max width for responsiveness */
+    margin-bottom: 20px;
+}
+
+.card {
+    width: 350px; /* Card width */
+    height: 300px; /* Card height */
+    border-radius: 20px; /* Rounded corners */
+    position: relative;
+    overflow: hidden; /* Ensure no overflow of child elements */
+    transition: 0.2s ease-in-out;
+    box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #ffffff;
+    display: flex; /* Use flexbox to center content inside the card */
+    flex-direction: column; /* Stack content vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+}
+
+/* Show the title and category centered, visible only on hover */
+.textBox {
+    position: absolute;
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Center the box */
+    color: white; /* Text color */
+    z-index: 2;
+    opacity: 0; /* Hidden by default */
+    transition: 0.2s ease-in-out; /* Smooth transition */
+    text-align: center; /* Center text within the box */
+}
+
+/* Display effect on hover */
+.card:hover .textBox {
+    opacity: 1; /* Show text box on hover */
+}
+
+.card:hover .img {
+    filter: blur(5px); /* Blur image on hover */
+}
+
+.img {
+    width: 100%; /* Ensure the image fits the card */
+    height: 100%; /* Ensure the image fills the height */
+    object-fit: cover; /* Cover the entire area */
+    transition: 0.2s ease-in-out; /* Smooth transition for effect */
+}
+
+.head {
+    font-weight: bold;
+    font-size: 16px; /* Font size for title */
+    text-transform: uppercase; /* Uppercase text */
+    font-family: 'Helvetica', sans-serif; /* Use Helvetica font */
+    margin-bottom: 3px; /* Space between title and category */
+}
+
+.textBox span {
+    font-size: 12px; /* Font size for category */
+    text-transform: uppercase; /* Uppercase for category */
+    font-family: 'Helvetica', sans-serif; /* Use Helvetica font */
+}
+
+
+.registration-container {
+    max-width: 400px; /* Maximum width for the form */
+    margin: 100px auto; /* Center the form horizontally and add space from top and bottom */
+    padding: 50px; /* Padding around the form */
+    background-color: #171717; /* Background color */
+    border-radius: 25px; /* Rounded corners */
+    box-shadow: 15px 15px 30px #423f3f, -15px -15px 30px #ffffff; /* Shadow effect */
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: white; /* Heading color */
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Gap between fields */
+}
+
+.field {
+    border-radius: 25px; /* Rounded corners for fields */
+    padding: 0.6em; /* Padding for fields */
+    border: none; /* Remove default border */
+    outline: none; /* Remove outline */
+    color: white; /* Text color */
+    background-color: #171717; /* Field background color */
+    box-shadow: inset 2px 5px 10px rgba(0, 0, 0, 0.5); /* Inner shadow for depth */
+}
+
+.input-field {
+    background: none; /* No background */
+    border: none; /* No border */
+    outline: none; /* No outline */
+    width: 100%; /* Full width */
+    color: #d3d3d3; /* Input text color */
+}
+
+.btn {
+    display: flex;
+    justify-content: center; /* Center button */
+}
+
+.button2 {
+    padding: 10px 20px; /* Padding for button */
+    border-radius: 5px; /* Rounded corners */
+    border: none; /* Remove border */
+    outline: none; /* Remove outline */
+    background-color: #252525; /* Button background */
+    color: white; /* Button text color */
+    transition: 0.4s ease-in-out; /* Transition for hover effect */
+}
+
+.button2:hover {
+    background-color: black; /* Change background on hover */
+}
+
+.error {
+    color: red; /* Error message color */
+    margin-bottom: 10px;
+    text-align: center; /* Center error message */
+}
