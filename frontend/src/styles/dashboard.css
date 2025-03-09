@@ -2,10 +2,10 @@
     max-width: 1397px; /* Set a maximum width for the container */
     margin: auto; /* Center the container */
     padding: 60px; /* Padding around the content */
-    background-color: #171717; /* Background color */
+    background-color: var(--bg-200); /* Bone */
     border-radius: 25px; /* Rounded corners */
     box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.5);
-    color: white; /* Default text color */
+    color: var(--text-100); /* Palo Santo */
     margin-top: 50px;
     margin-bottom: 50px;
 }
@@ -14,13 +14,12 @@
     display: grid; /* Use grid layout for the top cards */
     grid-template-columns: repeat(3, 1fr); /* Set three equal columns */
     gap: 20px; /* Space between cards */
-   
 }
 
 .profile-details, .upcoming-activity, .recent-activity {
     width: 430px;
     border-radius: 15px; /* Rounded corners */
-    background-color: #e0e0e0; /* Card background color */
+    background-color: var(--bg-200); /* Bone */
     padding: 15px; /* Padding inside cards */
     box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.2); /* Shadow effect */
     display: flex; /* Make cards flexible */
@@ -36,22 +35,17 @@
     box-sizing: border-box; /* Ensure padding does not affect width calculation */
 }
 
+/* For plan-for-later and create-services cards */
 .plan-for-later, .create-services {
-    width: calc(100%); /* Full width minus total horizontal gaps (20px * 2) */
+    width: calc(100%); /* Full width */
     border-radius: 15px; /* Rounded corners */
-    background-color: #e0e0e0; /* Background color */
+    background-color: var(--bg-200); /* Bone */
     padding: 15px; /* Padding inside cards */
     box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.2); /* Shadow effect */
     margin-top: 10px; /* Margin above the big card */
     margin-bottom: 10px;
-    
 }
 
-@media (max-width: 768px) {
-    .top-cards-container {
-        grid-template-columns: repeat(auto-fill, minmax(100%, 1fr)); /* Stacks cards in a single column on smaller screens */
-    }
-}
 @media (max-width: 768px) {
     .top-cards-container {
         grid-template-columns: repeat(auto-fill, minmax(100%, 1fr)); /* Stacks cards in a single column on smaller screens */

@@ -45,7 +45,7 @@ const services = [
         _id: '7',
         title: 'Home Organization',
         category: 'Home Services',
-        image: new URL('../assets/img/ServiceImg/HomeCleaning2.jpg', import.meta.url).href,
+        image: new URL('../assets/img/ServiceImg/HomeCleaning2.jpeg', import.meta.url).href,
         description: 'Helping clients declutter and organize their spaces.',
     },
     {
@@ -66,7 +66,7 @@ const services = [
         _id: '10',
         title: 'Music Lessons',
         category: 'Educational Services',
-        image: new URL('../assets/img/ServiceImg/MusicLessons.jpg', import.meta.url).href,
+        image: new URL('../assets/img/ServiceImg/MusicLesson1.jpg', import.meta.url).href,
         description: 'Offering lessons for aspiring musicians.',
     },
     {
@@ -80,7 +80,7 @@ const services = [
         _id: '12',
         title: 'Event Planning',
         category: 'Freelance and Creative Services',
-        image: new URL('../assets/img/ServiceImg/EventPlanning.jpg', import.meta.url).href,
+        image: new URL('../assets/img/ServiceImg/EventsPlanning1.jpg', import.meta.url).href,
         description: 'Connecting users with freelance event planners for parties and weddings.',
     },
     {
@@ -94,7 +94,7 @@ const services = [
         _id: '14',
         title: 'Delivery Services',
         category: 'Food and Cooking Services',
-        image: new URL('../assets/img/ServiceImg/DeliveryServices.jpg', import.meta.url).href,
+        image: new URL('../assets/img/ServiceImg/DeliveryServices1.jpg', import.meta.url).href,
         description: 'Enabling users to deliver food or goods locally.',
     },
     {
@@ -108,21 +108,21 @@ const services = [
         _id: '16',
         title: 'Beauty Services',
         category: 'Health and Fitness Services',
-        image: new URL('../assets/img/ServiceImg/BeautyServices.jpg', import.meta.url).href,
+        image: new URL('../assets/img/ServiceImg/BeautyServices1.jpg', import.meta.url).href,
         description: 'Connecting clients with professionals for personal care services.',
     },
     {
         _id: '17',
         title: 'Virtual Assistance',
         category: 'Support Services',
-        image: new URL('../assets/img/ServiceImg/VirtualAssistance.jpg', import.meta.url).href,
+        image: new URL('../assets/img/ServiceImg/VirtualAssistance.jpeg', import.meta.url).href,
         description: 'Offering administrative support from home.',
     },
     {
         _id: '18',
         title: 'Tech Support',
         category: 'Support Services',
-        image: new URL('../assets/img/ServiceImg/TechSupport.jpg', import.meta.url).href,
+        image: new URL('../assets/img/ServiceImg/TechSupport1.jpg', import.meta.url).href,
         description: 'Providing assistance with troubleshooting devices.',
     },
     {
@@ -136,7 +136,7 @@ const services = [
         _id: '20',
         title: 'Bike Repair',
         category: 'Vehicle Services',
-        image: new URL('../assets/img/ServiceImg/BikeRepair.jpg', import.meta.url).href,
+        image: new URL('../assets/img/ServiceImg/BikeRepair1.jpg', import.meta.url).href,
         description: 'Catering to cyclists with local bike repair services.',
     },
 ];

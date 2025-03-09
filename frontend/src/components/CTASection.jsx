@@ -1,21 +1,22 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../styles/CTAstyle.css'; // Import the new CTA styles
 
-const CTASection = () => {
+const CallToActionSection = () => {
   return (
-    <section className="cta-section">
-      <h2 className="cta-title">Be Part of the OLSO Community</h2>
-      <div className="d-flex justify-content-center">
+    <section className="cta-call-to-action">
+      <h2 className="cta-heading">Be Part of the OLSO Community</h2>
+      <div className="cta-button-container">
         <Link to="/Login">
-          <button className="btn btn-outline-light me-2">Log In</button>
+          <button className="cta-button btn-outline-light">Log In</button>
         </Link>
         <Link to="/Registration">
-          <button className="btn btn-primary">Register</button>
+          <button className="cta-button btn-primary">Register</button>
         </Link>
       </div>
     </section>
   );
 };
 
-export default CTASection;
+export default CallToActionSection;

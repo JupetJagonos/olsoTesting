@@ -1,85 +1,71 @@
-:root {
-    --primary-100: #4B5320; /* Dark Olive Green */
-    --primary-200: #787f4a; /* Olive Drab */
-    --primary-300: #dae0a5; /* Light Olive/Light Green */
-    --accent-100: #000000; /* Black */
-    --accent-200: #818181; /* Gray */
-    --text-100: #4b4b4b; /* Dark Gray */
-    --text-200: #777777; /* Gray */
-    --bg-100: #ebebeb; /* Very Light Gray */
-    --bg-200: #e1e1e1; /* Light Gray */
-    --bg-300: #b9b9b9; /* Medium Gray */
+.header-container {
+    height: 146px;
+    width: 100%; /* Ensure it uses full width */
 }
 
-.navbar {
-    background-color: rgba(75, 83, 32, 0.7); /* Semi-transparent Dark Olive Green */
-    height: 70px; /* Set the height of the navbar */
-    z-index: 9998;
-    backdrop-filter: blur(10px); /* Add a blur effect */
-    color: #ffffff; /* Text color */
-    box-shadow: 15px 15px 30px #7c8065, -15px -15px 30px #ffffff;
+.header {
+    background-color: transparent; /* Header background */
+    height: 146px;
+    position: fixed;
+    top: 0;
+    width: 100%; /* Full width */
+    z-index: 100; /* Make sure it's above surrounding content */
 }
 
-.navbaritem {
-    display: flex; /* Ensuring flex display for spacing */
-    justify-content: space-between; /* Space between logo and links/buttons */
-    align-items: center; /* Center items vertically */
-    height: 100%; /* Ensure full height is utilized */
-    
+.background-blur {
+    background-color: rgba(255, 255, 254, 0.5); /* Base color for blur effect */
+    filter: blur(8px); /* Apply a blur effect */
+    height: 133px; /* Set height */
+    left: 0; /* Positioning */
+    opacity: .80; /* Set opacity for transparency */
+    position: absolute; /* Absolute positioning to sit under header */
+    top: 0; /* Position at the top */
+    width: 100%; /* Full width of the header */
+    z-index: -1; /* Keep it behind other header elements */
 }
 
-.navbar-brand {
-    position: absolute; /* Positioning the logo */
-    left: 50%; /* Center the logo */
-    transform: translateX(-50%); /* Adjust to center */
+.navigation-links {
+    display: flex; /* Use flexbox layout for header links */
+    justify-content: space-between; /* Space between left and right */
+    align-items: center; /* Center vertically */
+    height: 100%; /* Use full header height */
+    margin-right: 180px;
 }
 
-.navbar-brand img {
-    width: 80px; /* Logo width */
-    height: 80px; /* Logo height */
+.homepage-link {
+    margin-left: 180px; /* Space from left edge */
+    text-align: left; /* Align text to the left */
 }
 
-.navbar-links {
-    display: flex; /* Use flex for links */
-    gap: 20px; /* Spacing between links */
-    margin-right: auto; /* Push links to the left */
-    padding-left: 20px;
+.other-links {
+    display: flex; /* Flex layout for other links */
+    gap: 20px; /* Space between the links */
 }
 
-.nav-link {
-    color: #ffffff; /* Text color for links */
-    font-family: "Helvetica", sans-serif; /* Font family set to Helvetica */
-    transition: color 0.3s; /* Transition for hover effect */
+.nav-item {
+    display: flex; /* Use flexbox to manage alignment */
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-start; /* Align all to the left */
+}
+
+.nav-item-number {
+    color: var( --primary-200); /* Floral White */
+    font-family: "Helvetica Neue-Bold", Helvetica;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.nav-item-name {
+    color: var( --primary-200); /* Floral White */
+    font-family: "Helvetica Neue-Bold", Helvetica;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.nav-description {
+    color: var( --primary-200); /* Floral White */
+    font-family: "Helvetica Neue-Regular", Helvetica;
     font-size: 12px;
-    gap: 20px;
-    position: relative;
-}
-
-.nav-link:hover {
-    color: #dae0a5; /* Change color on hover (Light Olive) */
-}
-
-
-.btn1, .btn2 { /* Ensure both button classes have similar styles */
-    transition: all 0.3s ease-in-out;
-    font-family: "Helvetica", sans-serif; /* Use Helvetica font */
-    width: 120px;  /* Button width */
-    height: 40px;  /* Button height */
-    border-radius: 50px; /* Rounded corners */
-    background-image: linear-gradient(135deg, var(--primary-200) 0%, var(--primary-100) 100%); /* Gradient background */
-    box-shadow: 0 20px 30px -6px rgba(223, 194, 192, 0.5); /* Shadow effect */
-    outline: none;
-    cursor: pointer;
-    border: none;
-    font-size: 12px; /* Font size */
-    color: white; /* Button text color */
-}
-
-.btn1:hover, .btn2:hover {
-    transform: translateY(3px); /* Slight lift on hover */
-    box-shadow: none; /* Remove shadow on hover */
-}
-
-.btn1:active, .btn2:active {
-    opacity: 0.5; /* Reduce opacity on active */
+    font-weight: 400;
+    margin-top: 2px; /* Closer spacing above the description */
 }

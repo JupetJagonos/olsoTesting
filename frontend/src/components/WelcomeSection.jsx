@@ -1,53 +1,56 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from 'react';
-
-const services = [
-  'Dog Walking',
-  'Babysitting',
-  'Home Cleaning',
-  'Handyman Services',
-  'Tutoring',
-  'Pet Sitting',
-  'Freelance Services',
-  'Delivery Services',
-  'Beauty Services',
-  'Fitness Training',
-  'Home Cooking',
-  'Photography',
-  'Moving/Packing Help',
-  'Gardening and Lawn Care',
-  'Event Planning',
-  'Personal Shopping',
-  'Elderly Care',
-  'Translation Services',
-  'Music Lessons',
-  'Home Organization',
-  'Virtual Assistance',
-  'Car Washing & Detailing',
-  'Tech Support',
-  'Bike Repair',
-  'Crafts and Handmade Goods',
-];
+import React, { useState, useEffect } from 'react';
+import RandomServiceCard from './RandomServiceCard';
+import CTASection from './CTASection';
+import services from '../api/ServiceData';
 
 const WelcomeSection = () => {
-  const [currentService, setCurrentService] = useState(services[0]); // Default to the first service
+    const [randomServices, setRandomServices] = useState([]); 
+    const [currentService, setCurrentService] = useState('...'); 
 
-  const getRandomService = () => {
-    const randomIndex = Math.floor(Math.random() * services.length);
-    setCurrentService(services[randomIndex]);
-  };
+    const getRandomServices = () => {
+        const shuffledServices = services.sort(() => Math.random() - 0.5);
+        const selectedServices = shuffledServices.slice(0, 3);
+        setRandomServices(selectedServices);
+    };
 
-  return (
-    <section className="welcome-section">
-      <h1 className="welcome-title">OLSO IS ALSO</h1>
-      <h2 
-        className="current-service"
-        onMouseEnter={getRandomService} // Change service on hover
-      >
-        {currentService}
-      </h2>
-    </section>
-  );
+    useEffect(() => {
+        getRandomServices();
+    }, []);
+
+    const getRandomServiceTitle = () => {
+        if (randomServices.length > 0) {
+            const randomIndex = Math.floor(Math.random() * randomServices.length);
+            setCurrentService(randomServices[randomIndex].title);
+        }
+    };
+
+    return (
+        <section className="header-and-welcome">
+            <div className="welcome-content">
+                <div className="random-services">
+                    {randomServices.map((service) => (
+                        <RandomServiceCard 
+                            key={service._id}
+                            image={service.image}
+                            link={service.link}
+                        />
+                    ))}
+                </div>
+                
+                <h2 
+                    className="olso-title" 
+                    // Change to click event
+                >
+                    .olso is also
+                </h2>
+                
+                <h2 className="random-services-text" onClick={getRandomServiceTitle}>{currentService}</h2>
+            </div>
+
+            <CTASection />
+        </section>
+    );
 };
 
 export default WelcomeSection;

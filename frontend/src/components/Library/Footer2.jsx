@@ -36,7 +36,7 @@ export function Footer2() {
 
         {/* Quick Links */}
         <div className="quicklinks">
-          <h2 className="mb-3 font-semibold">Quick Links</h2>
+          <h2 className="Sub-title">Quick Links</h2>
           <ul>
             <li className="py-2"><Link to="/" className="text-white">Home</Link></li>
             <li className="py-2"><Link to="/services" className="text-white">Services</Link></li>
@@ -48,7 +48,7 @@ export function Footer2() {
 
         {/* Stay Connected */}
         <div className="flex flex-col items-start">
-          <h2 className="mb-3 font-semibold">Stay Connected</h2>
+          <h2 className="Sub-title">Stay Connected</h2>
           <ul className="flex flex-row gap-4">
             <li><a href="#"><BiLogoFacebookCircle className="size-6 text-white" /></a></li>
             <li><a href="#"><FaXTwitter className="size-6 text-white" /></a></li>
@@ -60,7 +60,7 @@ export function Footer2() {
 
         {/* Newsletter Subscription */}
         <div className="flex flex-col">
-          <h2 className="mb-3 font-semibold">Subscribe</h2>
+          <h2 className="Sub-title">Subscribe</h2>
           <form onSubmit={formState.handleSubmit} className="flex flex-col">
             <Input
               id="email"

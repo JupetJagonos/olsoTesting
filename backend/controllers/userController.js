@@ -129,21 +129,21 @@ const updateProfile = async (req, res) => {
     }
 };
 
-// Get User Activities (Recent Activities)
+// Function to fetch user activities (recent activities)
 const getUserActivities = async (req, res) => {
-    const userId = req.user.id; // Retrieve user ID from the authenticated user
+    const userId = req.user.id; // Get user ID from token
 
     try {
-        const activities = await Activity.find({ user: userId }) // Fetch activities that belong to the user
-            .sort({ createdAt: -1 }) // Sort by newest first
-            .limit(5); // Optionally limit the number of activities returned
-
-        res.status(200).json(activities);
+        const activities = await Appointment.find({ user: userId }).populate('service').lean();
+        const completedActivities = activities.filter(activity => activity.status === 'Completed'); // Filter for "Completed"
+        
+        return res.status(200).json(completedActivities); // Return filtered activities
     } catch (error) {
         console.error('Error fetching user activities:', error);
-        res.status(500).json({ message: 'Server error' });
+        return res.status(500).json({ message: 'Server error' });
     }
 };
+
 
 // New function for fetching upcoming bookings
 const getUpcomingBookings = async (req, res) => {
@@ -160,6 +160,24 @@ const getUpcomingBookings = async (req, res) => {
     }
 };
 
+// Function to fetch recent bookings for providers
+const getRecentBookingsForProvider = async (req, res) => {
+    const providerId = req.user.id; // Get provider ID from the authenticated user
+
+    try {
+        const bookings = await Appointment.find({
+            provider: providerId,
+            status: 'Completed', // Get only completed bookings
+            date: { $lt: new Date() }, // Ensure it's past the current date
+        }).populate('service').lean();
+        
+        return res.status(200).json(bookings); // Return completed bookings
+    } catch (error) {
+        console.error('Error fetching recent bookings:', error);
+        return res.status(500).json({ message: 'Server error' });
+    }
+};
+
 // Exporting the user controller functions
 module.exports = {
     registerUser,
@@ -170,5 +188,6 @@ module.exports = {
     viewAppointments,
     updateProfile,
     getUserActivities,
-    getUpcomingBookings, // Add the new function to exports
+    getUpcomingBookings,
+    getRecentBookingsForProvider, 
 };
