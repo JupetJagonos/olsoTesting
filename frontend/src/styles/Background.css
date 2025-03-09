@@ -1,14 +1,14 @@
 :root {
-    --primary-100: #4B5320; /* Dark Olive Green */
-    --primary-200: #787f4a; /* Olive Drab */
-    --primary-300: #dae0a5; /* Light Olive/Light Green */
-    --accent-100: #000000; /* Black */
-    --accent-200: #818181; /* Gray */
-    --text-100: #4b4b4b; /* Dark Gray */
-    --text-200: #777777; /* Gray */
-    --bg-100: #ebebeb; /* Very Light Gray */
-    --bg-200: #e1e1e1; /* Light Gray */
-    --bg-300: #b9b9b9; /* Medium Gray */
+    --primary-100: #565449; /* Olive Drab */
+    --primary-200: #11120D; /* Smoky Drab */
+    --primary-300: #D8CFBC; /* Bone */
+    --accent-100: #FFFBF4; /* Floral White */
+    --accent-200: #0E1617; /* Leather */
+    --text-100: #7C7C77; /* Palo Santo */
+    --text-200: #4B4B4B; /* Dark Gray */
+    --bg-100: #FFFBF4; /* Floral White */
+    --bg-200: #D8CFBC; /* Bone */
+    --bg-300: #7C7C77; /* Palo Santo */
 }
 
 .background-container {

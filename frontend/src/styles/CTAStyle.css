@@ -1,0 +1,72 @@
+.cta-call-to-action {
+    text-align: left; /* Align content within CTA to the left */
+    margin-top: 20px; /* Space from the welcome section */
+    position: absolute; /* Allows positioning */
+    left: 80px; /* Align CTA section with Random Services text */
+    top: 400px; /* Adjust the top position as necessary */
+}
+
+.cta-heading {
+    color: var(--text-100); /* Use relevant text color */
+    font-family: "Helvetica Neue-Bold", Helvetica; /* Style for heading */
+    font-size: 24px; /* Adjust font size as needed */
+    margin-bottom: 20px; /* Space below the heading */
+}
+
+.cta-button-container {
+    display: flex; /* Use flexbox for button layout */
+    justify-content: center; /* Center align buttons */
+    gap: 10px; /* Space between buttons */
+}
+
+/* General button styles */
+button {
+    color: #090909; /* Text color */
+    padding: 0.7em 1.7em; /* Padding for the button */
+    font-size: 18px; /* Font size */
+    border-radius: 25px; /* Rounded corners for buttons */
+    background: #e8e8e8; /* Background color */
+    cursor: pointer; /* Pointer cursor on hover */
+    border: 1px solid #e8e8e8; /* Border for button */
+    transition: all 0.3s; /* Transition for hover and active effects */
+    box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff; /* Shadow effect */
+}
+
+/* Hover effect */
+button:hover {
+    border: 1px solid white; /* Change border color on hover */
+}
+
+/* Active state */
+button:active {
+    box-shadow: 4px 4px 12px #c5c5c5, -4px -4px 12px #ffffff; /* Adjust shadow on active */
+}
+
+/* CTA button styles */
+.cta-button {
+    border: none; /* Remove default border */
+    outline: none; /* Remove outline */
+    margin: 10px; /* Space between buttons */
+}
+
+.cta-button.btn-outline-light {
+    background-color: transparent; /* Transparent background for outline button */
+    color: var(--text-100); /* Use relevant text color */
+    border: 2px solid var(--text-100); /* Outline border */
+    transition: background-color 0.3s; /* Transition for hover effect */
+}
+
+.cta-button.btn-outline-light:hover {
+    background-color: var(--text-100); /* Change background on hover */
+    color: var(--accent-100); /* Change text color on hover */
+}
+
+.cta-button.btn-primary {
+    background-color: var(--primary-100); /* Use theme color for primary button */
+    color: var(--accent-100); /* Floral White */
+}
+
+.cta-button.btn-primary:hover {
+    background-color: var(--primary-300); /* Change background for hover effect */
+    color: var(--text-200); /* Darker text color on hover */
+}

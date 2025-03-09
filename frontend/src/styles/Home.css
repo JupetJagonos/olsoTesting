@@ -1,15 +1,16 @@
-/* Background color & general layout adjustments */
-body {
-  background-color: var(--bg-100); /* Body background color */
-  margin: 0; /* Remove default margin */
+:root {
+  --primary-100: #565449; /* Olive Drab */
+  --primary-200: #11120D; /* Smoky Drab */
+  --primary-300: #D8CFBC; /* Bone */
+  --accent-100: #FFFBF4; /* Floral White */
+  --accent-200: #0E1617; /* Leather */
+  --text-100: #7C7C77; /* Palo Santo */
+  --text-200: #4B4B4B; /* Dark Gray */
+  --bg-100: #FFFBF4; /* Floral White */
+  --bg-200: #D8CFBC; /* Bone */
+  --bg-300: #7C7C77; /* Palo Santo */
 }
 
-/* General styles for headings */
-h1, h2 {
-  color: #4B5320; /* Dark Olive Green for consistency */
-}
-
-/* Welcome Section Styling */
 .welcome-section {
   text-align: center; /* Center text */
   margin: 100px 0; /* Margin for vertical spacing */
@@ -21,7 +22,7 @@ h1, h2 {
   font-weight: bold;
   font-size: 45px; /* Font size for the main title */
   text-transform: uppercase; /* Uppercase text */
-  color: #787f4a; /* Olive Drab color */
+  color: var(--primary-200); /* Smoky Drab */
   margin-top: 60px; /* Space from the top */
 }
 
@@ -30,7 +31,7 @@ h1, h2 {
   font-family: 'Monigue', sans-serif; /* Use custom font */
   font-weight: bold;
   font-size: 250px; /* Large font size for current service */
-  color: #4B5320; /* Dark Olive Green */
+  color: var(--primary-100); /* Olive Drab */
   margin: 20px 0; /* Spacing above and below */
   padding: 20px;
   cursor: pointer; /* Change cursor on hover */
@@ -51,7 +52,7 @@ h1, h2 {
   font-weight: bold; /* Bold font for the title */
   font-size: 24px; /* Font size for the CTA title */
   text-transform: uppercase; /* Uppercase text */
-  color: #787f4a; /* Olive Drab color */
+  color: var(--primary-200); /* Smoky Drab */
 }
 
 /* Flexbox for button container */
@@ -59,44 +60,4 @@ h1, h2 {
   display: flex;
   justify-content: center; /* Center align buttons */
   gap: 10px; /* Space between buttons */
-}
-
-/* General Button Styles */
-.btn {
-  padding: 10px 20px; /* Padding for buttons */
-  border: none; /* No border */
-  border-radius: 5px; /* Rounded corners */
-  cursor: pointer; /* Pointer cursor for interaction */
-  transition: background-color 0.3s; /* Transition effect for hover */
-}
-
-.btn-outline-light {
-  background-color: transparent; /* Transparent background */
-  color: #4B5320; /* Dark Olive Green text */
-  border: 1px solid #4B5320; /* Border color */
-}
-
-.btn-outline-light:hover {
-  background-color: #4B5320; /* Background on hover */
-  color: white; /* Text color on hover */
-}
-
-.btn-primary {
-  background-color: #4B5320; /* Prime background color */
-  color: white; /* White text */
-}
-
-.btn-primary:hover {
-  background-color: #0056b3; /* Darker shade on hover */
-}
-
-/* Responsive Styles */
-@media (max-width: 600px) {
-  .current-service {
-    font-size: 100px; /* Smaller size for mobile */
-  }
-
-  .welcome-title {
-    font-size: 30px; /* Adjust welcome title */
-  }
 }
