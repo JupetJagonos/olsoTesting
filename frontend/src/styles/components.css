@@ -1,9 +1,13 @@
 .btn {
-    padding: 10px 20px;
-    color: white;
-    background-color: blue;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
+  padding: 10px 20px;
+  color: var(--accent-100); /* Floral White */
+  background-color: var(--primary-100); /* Olive Drab */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: var(--primary-300); /* Bone */
+  color: var(--text-200); /* Darker shade on hover */
+}

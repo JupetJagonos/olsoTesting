@@ -2,16 +2,15 @@
     max-width: 400px; /* Maximum width for the form */
     margin: 100px auto; /* Center the form horizontally and add space from top and bottom */
     padding: 50px; /* Padding around the form */
-    background-color: #171717; /* Background color */
+    background-color: var(--bg-200); /* Bone */
     border-radius: 25px; /* Rounded corners */
-    box-shadow: 15px 15px 30px #423f3f, -15px -15px 30px #ffffff;
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); Shadow effect */
+    box-shadow: 15px 15px 30px rgba(66, 63, 63, 0.3), -15px -15px 30px #ffffff; /* Shadow effect */
 }
 
 h1 {
     text-align: center;
     margin-bottom: 20px;
-    color: white; /* Heading color */
+    color: var(--text-100); /* Palo Santo */
 }
 
 .form {
@@ -25,17 +24,17 @@ h1 {
     padding: 0.6em; /* Padding for fields */
     border: none; /* Remove default border */
     outline: none; /* Remove outline */
-    color: white; /* Text color */
-    background-color: #171717; /* Field background color */
+    color: var(--text-100); /* Palo Santo */
+    background-color: var(--bg-200); /* Bone */
     box-shadow: inset 2px 5px 10px rgba(0, 0, 0, 0.5); /* Inner shadow for depth */
 }
 
 .input-field {
-    background: none; /* Remove background */
-    border: none; /* Remove border */
-    outline: none; /* Remove outline */
+    background: none; /* No background */
+    border: none; /* No border */
+    outline: none; /* No outline */
     width: 100%; /* Full width */
-    color: #d3d3d3; /* Input text color */
+    color: var(--text-100); /* Palo Santo */
 }
 
 .btn {
@@ -48,17 +47,17 @@ h1 {
     border-radius: 5px; /* Rounded corners */
     border: none; /* Remove border */
     outline: none; /* Remove outline */
-    background-color: #252525; /* Button background */
-    color: white; /* Button text color */
+    background-color: var(--primary-100); /* Olive Drab for button background */
+    color: var(--accent-100); /* Floral White */
     transition: 0.4s ease-in-out; /* Transition for hover effect */
 }
 
 .button2:hover {
-    background-color: black; /* Change background on hover */
+    background-color: var(--primary-300); /* Bone */
 }
 
 .error {
     color: red; /* Error message color */
-    margin-bottom: 10px;
+    margin-bottom: 10px; /* Space below error message */
     text-align: center; /* Center error message */
 }
