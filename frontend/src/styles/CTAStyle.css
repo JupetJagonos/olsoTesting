@@ -2,20 +2,22 @@
     text-align: left; /* Align content within CTA to the left */
     margin-top: 20px; /* Space from the welcome section */
     position: absolute; /* Allows positioning */
-    left: 80px; /* Align CTA section with Random Services text */
-    top: 400px; /* Adjust the top position as necessary */
+    left: 70px; /* Align CTA section with Random Services text */
+    margin-left: 110px;
+    position: absolute;
 }
 
 .cta-heading {
     color: var(--text-100); /* Use relevant text color */
     font-family: "Helvetica Neue-Bold", Helvetica; /* Style for heading */
-    font-size: 24px; /* Adjust font size as needed */
+    font-size: 12px; /* Adjust font size as needed */
     margin-bottom: 20px; /* Space below the heading */
+    justify-content: left;
 }
 
 .cta-button-container {
     display: flex; /* Use flexbox for button layout */
-    justify-content: center; /* Center align buttons */
+    justify-content: left; /* Center align buttons */
     gap: 10px; /* Space between buttons */
 }
 
@@ -23,7 +25,7 @@
 button {
     color: #090909; /* Text color */
     padding: 0.7em 1.7em; /* Padding for the button */
-    font-size: 18px; /* Font size */
+    font-size: 12px; /* Font size */
     border-radius: 25px; /* Rounded corners for buttons */
     background: #e8e8e8; /* Background color */
     cursor: pointer; /* Pointer cursor on hover */
