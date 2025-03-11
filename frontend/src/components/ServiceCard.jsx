@@ -11,13 +11,18 @@ const ServiceCard = ({ service }) => {
     };
 
     return (
-        <div className="card">
-            <h2>{service.title}</h2>
-            <p>{service.description}</p>
-            <p>Category: {service.category}</p>
-            <button onClick={handleBookClick}>
-                {isBooking ? 'Cancel Booking' : 'Book Service'}
-            </button>
+        <div 
+            className="service-card" 
+            style={{ backgroundImage: `url(${service.image})` }} // Use service.image for background
+        >
+            <div className="overlay">
+                <h2 className="card-title">{service.title}</h2>
+                <p className="card-description">{service.description}</p>
+                <p className="card-category">Category: {service.category}</p>
+                <button className="button" onClick={handleBookClick}>
+                    {isBooking ? 'Cancel Booking' : 'Book Service'}
+                </button>
+            </div>
 
             {/* Conditionally render the BookService form */}
             {isBooking && <BookService service={service} />}
@@ -31,6 +36,7 @@ ServiceCard.propTypes = {
         title: PropTypes.string.isRequired,
         description: PropTypes.string.isRequired,
         category: PropTypes.string.isRequired,
+        image: PropTypes.string.isRequired, // Required for the image URL
     }).isRequired,
 };
 
