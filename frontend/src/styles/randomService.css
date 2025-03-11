@@ -9,7 +9,7 @@
     --bg-100: #FFFBF4; /* Floral White */
     --bg-200: #D8CFBC; /* Bone */
     --bg-300: #7C7C77; /* Palo Santo */
-  }
+}
 
 /* Welcome Section Styles */
 .header-and-welcome {
@@ -17,43 +17,44 @@
     display: flex;
     flex-direction: column; /* Stack items vertically */
     justify-content: center; /* Center the welcome content vertically */
-    width: 100%; /* Full width */
-    position: relative; /* Relative for absolute positioning of inner elements */
-    height: 1024px; /* Height for welcome section */
-    padding: 50px; /* Padding for spacing */
+    align-items: flex-start; /* Align items to the left */ 
+    height: 720px; /* Height for welcome section */
+    padding-left: 180px; /* Align content with the header */
 }
 
 /* Welcome Content */
 .welcome-content {
     background-color: #ffffff; /* Keep background color */
-    height: 1024px; /* Stays the same */
-    width: 1440px; /* Full width of container */
-    position: relative; /* Allows absolute positioning of inner elements */
+    display: flex;
+    flex-direction: column; /* Stack items vertically within welcome content */
+    width: 100%; /* Use full width */
 }
 
 /* Random Services Container */
 .random-services {
-    display: flex; /* Align cards in a row */
-    justify-content: space-between; /* Space them out evenly */
-    margin-top: 20px; /* Space from the top */
-    position: absolute; /* Allows positioning */
-    top: 60px; /* Position adjustments based on the design */
-    right: 40px; /* Align right */
-    width: 520px; /* Fixed width for the random services */
-    margin-left: 20px;
+    display: flex; /* Enable flexbox to position children in a row */
+    flex-direction: row; /* Arrange cards horizontally */
+    justify-content: space-between; /* Space the cards evenly */
+    position: absolute; /* Allows positioning relative to parent */
+    top: 250px; /* Adjust vertical positioning */
+    right: 180px; /* Position at 180px from the right side */
+    text-align: left; /* Align text within cards to the left */
+    width: calc(180px * 3 + 10px * 2); /* Width to accommodate 3 cards and their margins */
 }
 
-.service-card {
+/* Random Service Card */
+.random-service-card {
     background-color: var(--bg-200); /* Bone color */
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
-    width: 180px; /* Fixed width for card */
-    height: 100%; /* Allow height to stretch according to image */
+    width: 180px; /* Fixed width for each card */
+    height: 180px; /* Fixed height for each card */
     overflow: hidden; /* Prevent overflow of child elements */
     text-decoration: none; /* Remove underline from link */
-    margin: 5px;
+    margin: 5px; /* Space around cards, top/bottom, left/right */
 }
 
+/* Image inside the card */
 .service-card-image {
     width: 100%; /* Ensure image fits within the card width */
     height: 100%; /* Make sure image fills height */
@@ -61,44 +62,50 @@
     border-radius: 10px; /* Match card's border radius */
 }
 
-/* Title for Service Card */
-.service-card-title {
-    color: var(--text-100); /* Palo Santo */
-    font-family: "Helvetica Neue-Bold", Helvetica;
-    font-size: 20px; /* Font size */
-    margin-bottom: 5px; /* Space below the title */
+/* Header Titles */
+.header-titles {
+    display: flex; /* Enable flexbox */
+    flex-direction: column; /* Stack titles vertically */
+    position: absolute; /* Allows positioning */
+    right: 180px; /* Position at 180px from the right side */
+    top: calc(250px + 180px + 30px); /* Position below random services container */
 }
 
+/* Title Styles */
+.Header-title {
+    align-self: flex-start; /* Align to the start of the flex container */
+    margin-top: 30px; /* Space above */
+    text-align: right;
+}
 
-
-/* Olso Title Styles */
 .olso-title {
-    color: var(--text-100); /* Palo Santo */
+    color: var(--text-100); /* Title color */
     font-family: "Helvetica Neue-Bold", Helvetica;
     font-size: 24px; /* Font size for title */
-    margin-top: 20px; /* Space above */
-    text-align: right; /* Align text to the right */
-    position: absolute; /* Allow for precise positioning */
-    right: 40px; /* Position it according to your design */
-    top: 320px; /* Adjust positioning as needed */
+    margin-top: 10px; /* Space above */
 }
 
-/* Random Services Text */
 .random-services-text {
-    color: orange; /* Dark Gray */
+    color: orange; /* Text color */
     font-family: "Helvetica Neue-Regular", Helvetica;
-    font-size: 80px; /* Font size */
+    font-size: 4rem; /* Use rem for scalable text */
     margin-top: 5px; /* Spacing below olso title */
-    text-align: right; /* Align text to the right */
-    position: absolute; /* Allow precise positioning */
-    right: 40px; /* Align to the right */
-    top: 360px; /* Position according to your design */
 }
+
+.header-click {
+    color: var(--text-100); /* Text color */
+    font-family: "Helvetica Neue-Bold", Helvetica;
+    font-size: 8px; /* Font size */
+    margin-top: 10px; /* Space above */
+    color:#D8CFBC ;
+    font-weight: 400;
+}
+
 
 .cta-section {
-    margin-top: 20px; /* Space from the welcome section */
-    text-align: left; /* Align content within CTA to the left */
+    margin-top: 30px; /* Space from the welcome section */
     position: absolute; /* Allows positioning */
-    left: 80px; /* Align CTA section with Random Services text */
-    top: 400px; /* Adjust the top position as necessary */
+    left: 180px; /* Align CTA section 180px from the left */
+    top: calc(250px + 180px + 30px); /* Adjust placement vertically based on layout needs */
+    text-align: left; /* Align content within CTA to the left */
 }

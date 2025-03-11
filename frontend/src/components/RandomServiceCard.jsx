@@ -5,7 +5,7 @@ import '../styles/randomService.css'; // Ensure the path is correct
 
 const RandomServiceCard = ({ title,image, link }) => {
     return (
-        <a href={link} className="service-card"> {/* Link to the service page */}
+        <a href={link} className="random-service-card"> {/* Link to the service page */}
             <img src={image} alt={title} className="service-card-image" /> {/* Image of the service */}
         </a>
     );

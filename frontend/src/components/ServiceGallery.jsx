@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
-import '../styles/ServiceGallery.css'; 
+import '../styles/ServiceCard.css'; 
 import services from '../api/ServiceData'; // Correct import path to ServiceData
 import ServiceCard from './ServiceCard'; // Import the ServiceCard component
 

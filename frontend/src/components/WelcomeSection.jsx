@@ -28,6 +28,7 @@ const WelcomeSection = () => {
     return (
         <section className="header-and-welcome">
             <div className="welcome-content">
+                {/* Random Services Container on the Left */}
                 <div className="random-services">
                     {randomServices.map((service) => (
                         <RandomServiceCard 
@@ -37,17 +38,17 @@ const WelcomeSection = () => {
                         />
                     ))}
                 </div>
-                
-                <h2 
-                    className="olso-title" 
-                    // Change to click event
-                >
-                    .olso is also
-                </h2>
-                
-                <h2 className="random-services-text" onClick={getRandomServiceTitle}>{currentService}</h2>
+                {/* Titles Section on the Right */}
+                <div className="header-titles">
+                    <div className="Header-title">
+                        <h2 className="olso-title">.olso is also</h2>
+                        <h2 className="random-services-text" onClick={getRandomServiceTitle}>
+                            {currentService}
+                        </h2>
+                        <h3 className="header-click">click to find out</h3>
+                    </div>
+                </div>
             </div>
-
             <CTASection />
         </section>
     );

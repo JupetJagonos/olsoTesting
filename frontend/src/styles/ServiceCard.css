@@ -1,4 +1,5 @@
-.card {
+/* ServiceCard.css */
+.service-card {
     width: 300px; /* Specify the width of the card */
     height: 200px; /* Specify the height of the card */
     border-radius: 10px;
@@ -6,22 +7,63 @@
     color: white; /* Text color */
     position: relative;
     overflow: hidden; /* Ensure children fit within */
+    display: flex; /* Use flexbox for alignment */
+    flex-direction: column; /* Stack items vertically */
+    background-size: cover; /* Cover the area with the image */
+    background-position: center; /* Center the image */
+    justify-content: flex-start; /* Align items at the top */
 }
 
-.textBox {
-    position: absolute;
-    bottom: 10px; /* Position text at the bottom */
-    left: 10px; /* Left padding */
-    background: rgba(0, 0, 0, 0.5); /* Optional: Darken background for readability */
-    border-radius: 5px;
-    padding: 5px;
+.overlay {
+    position: absolute; /* Position overlay absolutely */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Darken background for readability */
+    display: flex; /* Flex to center content */
+    flex-direction: column; /* Stack items vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: flex-start; /* Align items to the left */
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.3s ease; /* Smooth transition for visibility */
 }
 
-.textBox h3 {
-    margin: 0;
-    font-size: 1.2em; /* Adjust as needed */
+.service-card:hover .overlay {
+    opacity: 1; /* Show overlay on hover */
 }
 
-.textBox p {
-    margin: 5px 0;
+.card-title {
+    color: var(--primary-200); /* Match the color from .nav-item */
+    font-family: "Helvetica Neue-Bold", Helvetica;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0; /* Remove default margin */
+    padding-bottom: 2px; /* Adjust space below title */
+}
+
+.card-description {
+    color: var(--primary-200); /* Match the color from .nav-item */
+    font-family: "Helvetica Neue-Regular", Helvetica;
+    font-size: 12px;
+    font-weight: 400;
+    margin: 2px 0; /* Thinner margin for closer line spacing */
+}
+
+.card-category {
+    color: var(--primary-200); /* Match the color from .nav-item */
+    font-family: "Helvetica Neue-Bold", Helvetica;
+    font-size: 14px; /* Slightly smaller font size for category */
+    margin: 2px 0; /* Thinner margin for closer line spacing */
+    font-weight: 700;
+}
+
+.button {
+    margin-top: 10px; /* Space between button and content above */
+    background-color: var(--primary-200); /* Optional background color for the button */
+    color: white; /* Button text color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners for the button */
+    padding: 10px; /* Button padding */
+    cursor: pointer; /* Pointer cursor on hover */
 }
