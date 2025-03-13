@@ -1,0 +1,74 @@
+.create-service-container {
+    max-width: 800px; /* Maximum width for the form */
+    margin: 100px auto; /* Center the form horizontally and add space from top and bottom */
+    padding: 50px; /* Padding around the form */
+    background-color: var(--bg-200); /* Bone */
+    border-radius: 25px; /* Rounded corners */
+    box-shadow: 15px 15px 30px rgba(66, 63, 63, 0.3), -15px -15px 30px #ffffff; /* Shadow effect */
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--text-100); /* Palo Santo */
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Gap between fields */
+}
+
+.field {
+    border-radius: 25px; /* Rounded corners for fields */
+    padding: 0.6em; /* Padding for fields */
+}
+
+/* Input Field Styles */
+.input-field, .textarea-field, .select-field {
+    border: none; /* Remove default border */
+    outline: none; /* Remove outline */
+    color: var(--text-100); /* Palo Santo */
+    background-color: var(--bg-200); /* Bone */
+    box-shadow: inset 2px 5px 10px rgba(0, 0, 0, 0.5); /* Inner shadow for depth */
+    width: 100%; /* Full width */
+    padding: 10px; /* Padding for input fields */
+    border-radius: 25px; /* Rounded corners */
+}
+
+/* Specific styling for textarea */
+.textarea-field {
+    resize: none; /* Prevent resizing */
+}
+
+/* Button styles */
+.btn {
+    display: flex;
+    justify-content: center; /* Center button */
+}
+
+.button2 {
+    padding: 10px 20px; /* Padding for button */
+    border-radius: 25px; /* Rounded corners */
+    border: none; /* Remove border */
+    outline: none; /* Remove outline */
+    background-color: var(--primary-100); /* Olive Drab for button background */
+    color: var(--accent-100); /* Floral White */
+    transition: 0.4s ease-in-out; /* Transition for hover effect */
+}
+
+.button2:hover {
+    background-color: var(--primary-300); /* Bone */
+}
+
+.error {
+    color: red; /* Error message color */
+    margin-bottom: 10px; /* Space below error message */
+    text-align: center; /* Center error message */
+}
+
+.success {
+    color: green; /* Success message color */
+    margin-bottom: 10px; /* Space below success message */
+    text-align: center; /* Center success message */
+}
