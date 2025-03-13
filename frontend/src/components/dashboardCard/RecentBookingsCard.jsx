@@ -9,19 +9,15 @@ const RecentBookingsCard = ({ userType }) => {
     useEffect(() => {
         const fetchRecentBookings = async () => {
             const token = localStorage.getItem('token'); 
-            console.log("Token:", token); // Log the token for debugging
-
             if (userType === 'Provider') {
                 try {
-                    const response = await axios.get('http://localhost:5001/api/appointments/recent', { // Correct endpoint for fetching recent bookings
+                    const response = await axios.get('http://localhost:5001/api/appointments/recent', {
                         headers: { Authorization: `Bearer ${token}` },
                     });
 
-                    console.log('Response data:', response.data); // Log the response data
-                    // Filter for completed bookings beyond the current date
-                    const currentDate = new Date();
+                    // Filter for completed bookings
                     const completedBookings = response.data.filter(booking => 
-                        booking.status === 'Completed' && new Date(booking.date) < currentDate
+                        booking.status === 'Completed'
                     );
 
                     setRecentBookings(completedBookings); // Set recent bookings
@@ -37,19 +33,19 @@ const RecentBookingsCard = ({ userType }) => {
     return (
         <div className="card">
             <h2>Recent Bookings</h2>
-            {recentBookings.length > 0 ? (
-                <ul>
-                    {recentBookings.map(booking => (
-                        <li key={booking._id}>
-                            <p>User: {booking.user.name || 'Unnamed Client'}</p>
+            <div className="activities-grid">
+                {recentBookings.length > 0 ? (
+                    recentBookings.map(booking => (
+                        <div className="booking-card" key={booking._id}>
+                            <h4>User: {booking.user.name || 'Unnamed Client'}</h4>
                             <p>Service: {booking.service.title}</p>
                             <p>Date: {new Date(booking.date).toLocaleString()}</p>
-                        </li>
-                    ))}
-                </ul>
-            ) : (
-                <p>No recent bookings.</p>
-            )}
+                        </div>
+                    ))
+                ) : (
+                    <p>No recent bookings.</p>
+                )}
+            </div>
         </div>
     );
 };
