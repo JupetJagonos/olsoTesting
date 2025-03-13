@@ -4,21 +4,21 @@ import PropTypes from 'prop-types';
 
 const UpcomingBookingsCard = ({ upcomingBookings }) => {
     return (
-        <div className="upcoming-bookings">
+        <div className="card">
             <h2>Upcoming Bookings</h2>
-            {upcomingBookings.length > 0 ? (
-                <ul>
-                    {upcomingBookings.map(booking => (
-                        <li key={booking._id}>
-                            <p>User: {booking.user.name || 'Unnamed Client'}</p> {/* Access the populated user name */}
+            <div className="activities-grid">
+                {upcomingBookings.length > 0 ? (
+                    upcomingBookings.map(booking => (
+                        <div className="booking-card" key={booking._id}>
+                            <h4>User: {booking.user.name || 'Unnamed Client'}</h4> 
                             <p>Service: {booking.service ? booking.service.title : 'Service details not available'}</p>
                             <p>Date: {new Date(booking.date).toLocaleString()}</p>
-                        </li>
-                    ))}
-                </ul>
-            ) : (
-                <p>No upcoming bookings.</p>
-            )}
+                        </div>
+                    ))
+                ) : (
+                    <p>No upcoming bookings.</p>
+                )}
+            </div>
         </div>
     );
 };

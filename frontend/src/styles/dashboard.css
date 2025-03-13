@@ -1,53 +1,131 @@
+:root {
+    --primary-100: #565449; /* Olive Drab */
+    --primary-200: #11120D; /* Smoky Drab */
+    --primary-300: #D8CFBC; /* Bone */
+    --accent-100: #FFFBF4; /* Floral White */
+    --accent-200: #0E1617; /* Leather */
+    --text-100: #565449; /* Olive Drab for text */
+    --text-200: #4B4B4B; /* Dark Gray */
+    --bg-100: #FFFBF4; /* Floral White */
+    --bg-200: #D8CFBC; /* Bone */
+    --bg-300: #7C7C77; /* Palo Santo */
+}
+
 .dashboard-container {
     max-width: 1397px; /* Set a maximum width for the container */
     margin: auto; /* Center the container */
-    padding: 60px; /* Padding around the content */
-    background-color: var(--bg-200); /* Bone */
+    padding: 40px; /* Padding around the content */
+    background-color: var(--bg-100); /* Floral White */
     border-radius: 25px; /* Rounded corners */
-    box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.5);
-    color: var(--text-100); /* Palo Santo */
-    margin-top: 50px;
-    margin-bottom: 50px;
+    color: var(--text-100); /* Olive Drab for text */
+    margin-top: 50px; /* Space at the top */
+    margin-bottom: 50px; /* Space at the bottom */
+    display: flex; 
+    flex-direction: column;
+    align-items: stretch;
 }
 
-.top-cards-container {
-    display: grid; /* Use grid layout for the top cards */
-    grid-template-columns: repeat(3, 1fr); /* Set three equal columns */
-    gap: 20px; /* Space between cards */
-}
-
-.profile-details, .upcoming-activity, .recent-activity {
-    width: 430px;
+/* General card styling */
+.card {
     border-radius: 15px; /* Rounded corners */
     background-color: var(--bg-200); /* Bone */
-    padding: 15px; /* Padding inside cards */
-    box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.2); /* Shadow effect */
-    display: flex; /* Make cards flexible */
-    flex-direction: column; /* Stack content vertically */
+    padding: 20px; /* Padding inside cards */
+    margin-bottom: 20px; /* Space below each card */
+    min-height: 200px; /* Minimum height for consistency */
+    max-height: 400px; /* Maximum height to prevent overflow issues */
+    overflow: auto; /* Allow scrolling if content overflows */
 }
 
-.big-card {
-    margin-top: 10px; /* Margin above the big card */
-    margin-bottom: 10px;
-    display: flex; /* Use flex to stack notice and create services vertically */
-    flex-direction: column; /* Stack vertically */
-    padding: 10px; /* Add padding inside the big card */
-    box-sizing: border-box; /* Ensure padding does not affect width calculation */
+/* Services container */
+.Services {
+    flex: 1;
+    width: 100%; /* Ensure Services takes full width of the parent container */
+    display: flex;
+    flex-direction: column; 
+    gap: 30px;
+    overflow: hidden; /* Prevent scrolling on Services */
+    border-radius: 25px; /* Rounded corners */
+    background-color: var(--bg-200); /* Bone for matching background */
 }
 
-/* For plan-for-later and create-services cards */
-.plan-for-later, .create-services {
-    width: calc(100%); /* Full width */
-    border-radius: 15px; /* Rounded corners */
-    background-color: var(--bg-200); /* Bone */
-    padding: 15px; /* Padding inside cards */
-    box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.2); /* Shadow effect */
-    margin-top: 10px; /* Margin above the big card */
-    margin-bottom: 10px;
+/* Section for bookings and activities */
+.activities-bookings-section {
+    width: 100%; /* Full width inside the Services container */
+    padding: 20px; /* Padding inside the section */
+    background-color: var(--bg-200); /* Floral White for contrast */
+    margin: 20px 0; /* Top and bottom margin */
+    display: flex; /* Use flexbox to arrange items */
+    flex-direction: column; /* Stack headings above cards */
+    gap: 20px; /* Space between sections */
 }
 
+.bookings-row, .activities-row {
+    display: flex; /* Use flexbox to align items side by side */
+    justify-content: center; /* Center cards within the row */
+    gap: 20px; /* Space between items */
+}
+
+.booking-container, .activity-container {
+    flex: 1; /* Allow containers to grow and shrink */
+    flex-basis: 0; /* Ensure that they can shrink when needed */
+    max-width: 400px; /* Limit the maximum width of cards */
+    padding: 15px; /* Padding inside each container */
+    border-radius: 10px; /* Rounded corners */
+    background-color: var(--accent-100); /* Floral White for cards */
+    margin-right: 10px; /* Space between cards */
+    min-height: 200px; /* Minimum height for consistency */
+    max-height: 400px; /* Maximum height for overflow management */
+    overflow: hidden; /* Hide overflow from the container */
+}
+
+/* Inner content container to allow scrolling */
+.booking-container-content, .activity-container-content {
+    height: 100%; /* Use full height of the parent */
+    overflow: auto; /* Allow scrolling for content that overflows */
+}
+
+.booking-container:last-child, .activity-container:last-child {
+    margin-right: 0; /* Remove margin for the last container */
+}
+
+/* Heading styles */
+h2, h3, .booking-container h3, .activity-container h3 {
+    color: var(--primary-100); /* Olive Drab for headings */
+    margin-bottom: 15px; /* Space below headings */
+    font-size: 1.5rem; /* Adjusted for better visibility */
+}
+
+/* Adjust text sizes within cards */
+.booking-container p, .activity-container p {
+    font-size: 0.85rem; /* Smaller font size for content */
+    margin: 5px 0; /* Consistent margin on paragraphs */
+}
+
+.booking-container h4, .activity-container h4 {
+    font-size: 1rem; /* Adjusted size for sub-headings */
+    margin: 10px 0; /* Margin for sub-headings */
+}
+
+/* Media queries for responsiveness */
 @media (max-width: 768px) {
-    .top-cards-container {
-        grid-template-columns: repeat(auto-fill, minmax(100%, 1fr)); /* Stacks cards in a single column on smaller screens */
+    .bookings-row, 
+    .activities-row {
+        flex-direction: column; /* Stack items vertically on smaller screens */
+    }
+
+    .Services {
+        padding: 10px; /* Reduce padding for smaller screens */
+    }
+
+    .card {
+        padding: 15px; /* Adjust padding inside cards for smaller screens */
+    }
+
+    h2, h3 {
+        font-size: 1.2rem; /* Adjust size for responsive headings */
+    }
+
+    .booking-container p, .activity-container p {
+        font-size: 0.75rem; /* Smaller font size for mobile viewing */
     }
 }

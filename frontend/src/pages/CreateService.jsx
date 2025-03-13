@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import '../styles/createService.css'; // Import the created CSS file
 
 const CreateService = ({ onServiceCreated, userType }) => {
     const [title, setTitle] = useState('');
@@ -54,37 +55,53 @@ const CreateService = ({ onServiceCreated, userType }) => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input
-                type="text"
-                placeholder="Service Title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                required
-            />
-            <textarea
-                placeholder="Service Description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                required
-            ></textarea>
-            <input
-                type="number"
-                placeholder="Service Price"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-                required
-            />
-            <select value={category} onChange={(e) => setCategory(e.target.value)} required>
-                <option value="">Select a Category</option>
-                {categories.map((cat) => (
-                    <option key={cat} value={cat}>{cat}</option>
-                ))}
-            </select>
-            <button type="submit">Create Service</button>
-            {success && <p>{success}</p>}
-            {error && <p>{error}</p>}
-        </form>
+        <div className="create-service-container">
+            <h1>Create a New Service</h1>
+            <form className="form" onSubmit={handleSubmit}>
+                <div className="field">
+                    <input
+                        type="text"
+                        className="input-field"
+                        placeholder="Service Title"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="field">
+                    <textarea
+                        className="textarea-field"
+                        placeholder="Service Description"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        required
+                    ></textarea>
+                </div>
+                <div className="field">
+                    <input
+                        type="number"
+                        className="input-field"
+                        placeholder="Service Price"
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="field">
+                    <select className="select-field" value={category} onChange={(e) => setCategory(e.target.value)} required>
+                        <option value="">Select a Category</option>
+                        {categories.map((cat) => (
+                            <option key={cat} value={cat}>{cat}</option>
+                        ))}
+                    </select>
+                </div>
+                <div className="btn">
+                    <button type="submit" className="button2">Create Service</button>
+                </div>
+                {success && <p className="success">{success}</p>}
+                {error && <p className="error">{error}</p>}
+            </form>
+        </div>
     );
 };
 

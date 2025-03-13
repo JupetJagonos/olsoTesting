@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const ProfileCard = ({ userData }) => {
     return (
-        <div className="card">
+        <div className="card-profile">
             <h2>Profile Details</h2>
             {userData && <p>Name: {userData.name}</p>}
             {userData && <p>User Type: {userData.userType}</p>}
