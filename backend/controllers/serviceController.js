@@ -65,11 +65,12 @@ const updateService = async (req, res) => {
 // Get all services
 const getAllServices = async (req, res) => {
     try {
-        const services = await Service.find(); // Fetch all services from the database
-        res.status(200).json(services); // Return the services as JSON
+        const services = await Service.find()
+            .populate('provider'); // Ensure you populate the provider details here
+        res.status(200).json(services); // Send services back to the client
     } catch (error) {
         console.error('Error fetching services:', error);
-        res.status(500).json({ message: 'Server error' }); // Handle internal errors
+        res.status(500).json({ message: 'Server error', error: error.message });
     }
 };
 

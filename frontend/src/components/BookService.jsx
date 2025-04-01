@@ -1,60 +1,106 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { bookService } from '../api/bookApi'; // Import the API function
+import PropTypes from 'prop-types'; // Import PropTypes for type checking
+import axios from 'axios'; // Import Axios for making HTTP requests
+import '../styles/BookService.css'; // Import the CSS for styling the BookService component
 
-const BookService = ({ service }) => {
-    const [date, setDate] = useState('');
-    const [time, setTime] = useState(''); // Added state for time
-    const [error, setError] = useState('');
-    const [success, setSuccess] = useState('');
+const BookService = ({ service, hours, setHours }) => {
+    const [date, setDate] = useState(''); // State for the selected date
+    const [time, setTime] = useState(''); // State for the selected time
+    const [error, setError] = useState(''); // Error message state
+    const [success, setSuccess] = useState(''); // Success message state
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault(); // Prevent default form submission
 
-        // Combine date and time into a single datetime string (optional)
-        const dateTime = new Date(`${date}T${time}`); 
+        const token = localStorage.getItem('token'); // Get the token from localStorage
+        if (!token) {
+            setError('No token found, please log in again.');
+            return;
+        }
 
         try {
-            await bookService(service._id, dateTime.toISOString()); // Update with both
-            setSuccess('Service booked successfully!'); // Show success message
-            setDate(''); // Reset the date input
-            setTime(''); // Reset the time input
-        } catch (err) {
-            setError('Failed to book service.'); // Show error message
-            console.error('Error booking service:', err.response?.data); // Log error for debugging
+            const bookingData = {
+                serviceId: service._id, // Pass the service ID
+                hours: hours,
+                date: date,
+                time: time,
+            };
+
+            const response = await axios.post('http://localhost:5001/api/appointments/bookings', bookingData, {
+                headers: {
+                    Authorization: `Bearer ${token}`, // Include JWT token in header
+                }
+            });
+
+            // Check for successful response
+            if (response.status === 201) {
+                setSuccess(`Successfully booked ${service.title} for ${hours} hours on ${date} at ${time}.`);
+                setError(''); // Clear error messages if booking was successful
+                // Optional: You may want to perform additional actions, like resetting inputs or navigating
+            }
+        } catch (error) {
+            console.error('Error booking service:', error);
+            const errorMessage = error.response?.data?.message || 'Failed to confirm booking. Please try again.';
+            setError(errorMessage); // Set error message
+            setSuccess(''); // Clear previous success messages
         }
     };
 
     return (
-        <div>
-            <h2>Book Service: {service.title}</h2>
-            <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="booking-form">
+            <label>
+                Number of hours:
+                <input
+                    type="number"
+                    value={hours}
+                    onChange={(e) => setHours(e.target.value)}
+                    min="1"
+                    placeholder="1"
+                    required // Ensure this field is required
+                />
+            </label>
+
+            <label>
+                Date:
                 <input
                     type="date"
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
-                    required
+                    required // Make this field required
                 />
+            </label>
+
+            <label>
+                Time:
                 <input
-                    type="time" // New input for time
+                    type="time"
                     value={time}
                     onChange={(e) => setTime(e.target.value)}
-                    required
+                    required // Ensure this field is required
                 />
-                <button type="submit">Book Service</button>
-                {success && <p>{success}</p>}
-                {error && <p>{error}</p>}
-            </form>
-        </div>
+            </label>
+
+            {error && <p className="error">{error}</p>} {/* Display error messages */}
+            {success && <p className="success">{success}</p>} {/* Display success messages */}
+
+            <button type="submit" className="button">Confirm Booking</button>
+        </form>
     );
 };
 
+// Define PropTypes
 BookService.propTypes = {
     service: PropTypes.shape({
         _id: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+        category: PropTypes.string.isRequired,
+        providerName: PropTypes.string.isRequired, // Required for provider's name
+        price: PropTypes.number.isRequired, // Required for service price
     }).isRequired,
+    hours: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired, // Accepts a string or a number for hours
+    setHours: PropTypes.func.isRequired, // Function to set hours
 };
 
 export default BookService;

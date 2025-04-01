@@ -1,0 +1,32 @@
+.booking-form {
+    display: flex; /* Use flex for layout */
+    flex-direction: column; /* Stack elements vertically */
+    width: 100%; /* Full width */
+}
+
+label {
+    color: var(--accent-100); /* Text color */
+    font-family: "Helvetica Neue-Regular", Helvetica; /* Font family */
+    margin-bottom: 8px; /* Space below label */
+}
+
+input[type="number"] {
+    border-radius: 5px; /* Rounded corners */
+    border: 1px solid var(--text-200); /* Border */
+    padding: 5px; /* Inner padding */
+    width: 60px; /* Fixed width for the input */
+}
+
+.button {
+    margin-top: 10px; /* Space above button */
+    background-color: var(--primary-200); /* Background color for button */
+    color: white; /* Button text color */
+    padding: 10px; /* Button padding */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor */
+}
+
+.button:hover {
+    background-color: var(--primary-100); /* Change background color on hover */
+}

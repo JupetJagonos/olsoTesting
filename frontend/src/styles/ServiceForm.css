@@ -15,7 +15,7 @@ h2 {
 
 .field {
     border-radius: 25px; /* Rounded corners for fields */
-    padding: 0.6em; /* Padding for fields */
+    padding: 0.8em; /* Padding for fields */
     border: none; /* Remove default border */
     outline: none; /* Remove outline */
     color: white; /* Text color */
