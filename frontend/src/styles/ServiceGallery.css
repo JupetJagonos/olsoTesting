@@ -1,133 +1,141 @@
+:root {
+    --primary-100: #565449; /* Olive Drab */
+    --primary-200: #11120D; /* Smoky Drab */
+    --primary-300: #D8CFBC; /* Bone */
+    --accent-100: #FFFBF4; /* Floral White */
+    --accent-200: #0E1617; /* Leather */
+    --text-100: #7C7C77; /* Palo Santo */
+    --text-200: #4B4B4B; /* Dark Gray */
+    --bg-100: #FFFBF4; /* Floral White */
+    --bg-200: #D8CFBC; /* Bone */
+    --bg-300: #7C7C77; /* Palo Santo */
+}
+
+.service-card {
+    width: 300px; /* Width of the card */
+    height: 200px; /* Height of the card */
+    border-radius: 10px; /* Rounded corners */
+    padding: 15px; /* Inner padding */
+    color: white; /* Text color */
+    position: relative; /* Position for overlay control */
+    overflow: hidden; /* Ensure children fit within */
+    display: flex; /* Use flexbox for alignment */
+    flex-direction: column; /* Stack items vertically */
+    background-size: cover; /* Cover the area with the image */
+    background-position: center; /* Center the image */
+    justify-content: flex-start; /* Align items at the top */
+    transition: transform 0.3s ease; /* Smooth scale transform on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+}
+
+.overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.3s ease; /* Smooth opacity transition */
+    padding: 10px;
+    box-sizing: border-box; /* Include padding in width/height */
+}
+
 .service-card-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 columns */
-    gap: 10px; /* Set a small gap between cards */
+    grid-template-columns: repeat(3, 1fr); /* Set to a 3-column layout */
+    gap: 10px; /* Reduced space between cards (change from 20px to smaller value like 10px or less) */
     justify-items: center; /* Center the cards within each grid cell */
-    align-items: start; /* Align to the start at the top instead of centered */
-    padding: 0; /* No padding around the container */
+    align-items: start; /* Align to the start at the top */
+    padding: 20px; /* Padding around the container */
     margin: 0 auto; /* Center the grid container on the page */
-    max-width: 90%; /* Optionally set a max width for responsiveness */
-    margin-bottom: 20px;
+    max-width: 100%; /* Set a max width for responsiveness */
 }
 
+/* Card styling for service category */
 .card {
-    width: 350px; /* Card width */
-    height: 300px; /* Card height */
-    border-radius: 20px; /* Rounded corners */
-    position: relative;
-    overflow: hidden; /* Ensure no overflow of child elements */
-    transition: 0.2s ease-in-out;
-    box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #ffffff;
-    display: flex; /* Use flexbox to center content inside the card */
-    flex-direction: column; /* Stack content vertically */
-    justify-content: center; /* Center content vertically */
-    align-items: center; /* Center content horizontally */
+    background-color: var(--bg-200); /* Assign Bone color */
+    border-radius: 10px; /* Rounded corners */
+    overflow: hidden; /* Prevent overflow of child elements */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    height: 180px; /* Fixed height */
+    width: 360px; /* Fixed width */
+    position: relative; /* For absolute positioning of text */
+    transition: transform 0.2s ease-in-out; /* Smooth transition on hover */
 }
 
-/* Show the title and category centered, visible only on hover */
+
+/* No need for .img class since images will be used as background */
 .textBox {
-    position: absolute;
+    position: absolute; /* Position text absolutely */
     top: 50%; /* Center vertically */
     left: 50%; /* Center horizontally */
-    transform: translate(-50%, -50%); /* Center the box */
-    color: white; /* Text color */
-    z-index: 2;
-    opacity: 0; /* Hidden by default */
-    transition: 0.2s ease-in-out; /* Smooth transition */
+    transform: translate(-50%, -50%); /* Adjust to center */
+    color: var(--accent-100); /* Text color (Floral White) */
+    z-index: 2; /* Ensure it appears above the image */
     text-align: center; /* Center text within the box */
+    font-weight: bold; /* Make text bold */
+    font-size: 1em; /* Font size for text */
+    text-transform: uppercase; /* Uppercase text for emphasis */
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.2s ease-in-out; /* Smooth transition */
 }
 
-/* Display effect on hover */
+/* Display effect on card hover */
+.card:hover {
+    transform: scale(1.05); /* Scale up on hover */
+}
+
 .card:hover .textBox {
     opacity: 1; /* Show text box on hover */
 }
 
-.card:hover .img {
-    filter: blur(5px); /* Blur image on hover */
-}
-
-.img {
-    width: 100%; /* Ensure the image fits the card */
-    height: 100%; /* Ensure the image fills the height */
-    object-fit: cover; /* Cover the entire area */
-    transition: 0.2s ease-in-out; /* Smooth transition for effect */
-}
-
+/* Headline styling for category names */
 .head {
     font-weight: bold;
-    font-size: 16px; /* Font size for title */
+    font-size: 1.2em; /* Larger font for category names */
     text-transform: uppercase; /* Uppercase text */
     font-family: 'Helvetica', sans-serif; /* Use Helvetica font */
-    margin-bottom: 3px; /* Space between title and category */
 }
 
-.textBox span {
-    font-size: 12px; /* Font size for category */
-    text-transform: uppercase; /* Uppercase for category */
-    font-family: 'Helvetica', sans-serif; /* Use Helvetica font */
-}
-
-
+/* This section will retain styles for registration forms and buttons, etc. */
 .registration-container {
-    max-width: 400px; /* Maximum width for the form */
-    margin: 100px auto; /* Center the form horizontally and add space from top and bottom */
-    padding: 50px; /* Padding around the form */
-    background-color: #171717; /* Background color */
+    max-width: 400px; /* Width for registration forms */
+    margin: 100px auto; /* Center forms */
+    padding: 50px; /* Padding around forms */
+    background-color: #171717; /* Background for forms */
     border-radius: 25px; /* Rounded corners */
-    box-shadow: 15px 15px 30px #423f3f, -15px -15px 30px #ffffff; /* Shadow effect */
+    box-shadow: 15px 15px 30px rgba(66, 63, 63, 0.3); /* Shadow effect */
 }
 
 h1 {
-    text-align: center;
-    margin-bottom: 20px;
+    text-align: center; /* Center alignment for headings */
+    margin-bottom: 20px; /* Spacing below headings */
     color: white; /* Heading color */
 }
 
-.form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px; /* Gap between fields */
-}
-
-.field {
-    border-radius: 25px; /* Rounded corners for fields */
-    padding: 0.6em; /* Padding for fields */
-    border: none; /* Remove default border */
-    outline: none; /* Remove outline */
-    color: white; /* Text color */
-    background-color: #171717; /* Field background color */
-    box-shadow: inset 2px 5px 10px rgba(0, 0, 0, 0.5); /* Inner shadow for depth */
-}
-
-.input-field {
-    background: none; /* No background */
-    border: none; /* No border */
-    outline: none; /* No outline */
-    width: 100%; /* Full width */
-    color: #d3d3d3; /* Input text color */
-}
-
-.btn {
-    display: flex;
-    justify-content: center; /* Center button */
-}
-
+/* Button styling */
 .button2 {
-    padding: 10px 20px; /* Padding for button */
+    padding: 10px 20px; /* Button padding */
     border-radius: 5px; /* Rounded corners */
     border: none; /* Remove border */
-    outline: none; /* Remove outline */
+    outline: none; /* No outline */
     background-color: #252525; /* Button background */
     color: white; /* Button text color */
     transition: 0.4s ease-in-out; /* Transition for hover effect */
 }
 
 .button2:hover {
-    background-color: black; /* Change background on hover */
+    background-color: black; /* Button hover effect */
 }
 
+/* Error message styling */
 .error {
     color: red; /* Error message color */
-    margin-bottom: 10px;
-    text-align: center; /* Center error message */
+    margin-bottom: 10px; /* Bottom margin for error messages */
+    text-align: center; /* Center error messages */
 }
