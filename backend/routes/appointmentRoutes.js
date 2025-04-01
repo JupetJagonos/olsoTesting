@@ -3,26 +3,18 @@ const {
     createAppointment,
     getUserAppointments,
     getUpcomingBookingsForProvider,
-    getRecentBookingsForProvider,
+    getRecentBookingsForProvider, // Ensure this is imported
     updateBookingStatus,
-} = require('../controllers/appointmentController');
+} = require('../controllers/appointmentController'); // All functions from appointmentController should be available
 const auth = require('../middleware/auth');
 
-const router = express.Router(); // Initialize the router
+const router = express.Router();
 
-// Create an Appointment
-router.post('/', auth(['Client']), createAppointment);
+// Verify all routes are defined appropriately
+router.post('/bookings', auth(['Client']), createAppointment);
+router.get('/appointments', auth(['Client', 'Provider']), getUserAppointments);
+router.get('/upcoming', auth(['Provider']), getUpcomingBookingsForProvider);
+router.get('/recent', auth(['Provider']), getRecentBookingsForProvider); // Ensure this function exists in the controller
+router.put('/:id/status', auth(['Provider']), updateBookingStatus);
 
-// Get User Appointments
-router.get('/', auth(['Client', 'Provider']), getUserAppointments);
-
-// Ensure this upcoming bookings route is defined
-router.get('/upcoming', auth(['Provider']), getUpcomingBookingsForProvider); // For providers' upcoming bookings
-
-// Get Recent Bookings for Provider
-router.get('/recent', auth(['Provider']), getRecentBookingsForProvider); // Fetch recent bookings for providers
-
-
-router.put('/:id/status', auth(['Provider']), updateBookingStatus); 
-
-module.exports = router; // Export the router
+module.exports = router;

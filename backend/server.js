@@ -2,9 +2,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const connectDB = require('./config/db'); // Ensure you have a proper connection
+const connectDB = require('./config/db'); // Function to connect to the database
 
-dotenv.config(); // Load environment variables from .env file
+// Load environment variables from .env file
+dotenv.config(); 
+
+// Connect to MongoDB
+connectDB();
 
 // Check the JWT secret environment variable
 console.log('JWT_SECRET:', process.env.JWT_SECRET); 
@@ -17,18 +21,15 @@ const reviewRoutes = require('./routes/reviewRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const errorHandler = require('./middleware/errorHandler'); // Custom error handling middleware
 
-// Connect to MongoDB
-connectDB();
-
 const app = express(); // Create an Express application
 
 // Middleware setup
 app.use(cors()); // Enable Cross-Origin Resource Sharing
 app.use(express.json()); // Parse JSON request bodies
 
-// Basic test route
+// Basic test route to confirm server is running
 app.get("/", (req, res) => {
-    res.send("BACK END - OLSO"); // Confirm the backend is running
+    res.send("BACK END - OLSO"); 
 });
 
 // Route Definitions for the API
@@ -42,7 +43,7 @@ app.use('/api/admin', adminRoutes); // Admin related routes
 app.use(errorHandler); // Use this for handling errors across your API
 
 // Starting the server
-const PORT = process.env.PORT || 5001; // Use either the specified PORT or default to 5001
+const PORT = process.env.PORT || 5001; // Set the port to use 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`); // Log confirmation of server start
 });
