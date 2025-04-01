@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom'; // To access location
 import axios from 'axios'; 
 import ServiceCard from '../components/ServiceCard'; 
 import SearchBar from '../components/SearchBar'; 
@@ -8,24 +9,15 @@ import CreateService from './CreateService';
 import '../styles/ServiceGallery.css'; 
 
 const ServiceListings = () => {
+    const { state } = useLocation(); // Get the passed state
+    const selectedCategory = state ? state.selectedCategory : null; // Extract selected category
+
     const [services, setServices] = useState([]); 
     const [filteredServices, setFilteredServices] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
     const userType = localStorage.getItem('userType'); // Fetch userType from local storage
-
-    const categories = [
-        'Pet Services',
-        'Child and Elderly Care',
-        'Home Services',
-        'Educational Services',
-        'Freelance and Creative Services',
-        'Food and Cooking Services',
-        'Health and Fitness Services',
-        'Support Services',
-        'Vehicle Services',
-    ];
 
     useEffect(() => {
         const fetchServices = async () => {
@@ -35,14 +27,24 @@ const ServiceListings = () => {
                 setFilteredServices(response.data); 
             } catch (err) {
                 console.error('Error fetching services:', err);
-                setError('Failed to load services.'); // Set error message
+                setError('Failed to load services.'); 
             } finally {
-                setLoading(false);
+                setLoading(false); 
             }
         };
 
         fetchServices(); 
     }, []);
+
+    useEffect(() => {
+        // Filter services based on the selected category
+        if (selectedCategory) {
+            const filtered = services.filter(service => service.category === selectedCategory);
+            setFilteredServices(filtered);
+        } else {
+            setFilteredServices(services); // Reset to default if no category is selected
+        }
+    }, [selectedCategory, services]); // Dependency on services and selected category
 
     const handleSearch = (query) => {
         const filtered = services.filter(service =>
@@ -52,12 +54,8 @@ const ServiceListings = () => {
     };
 
     const handleCategorySelect = (category) => {
-        if (category) {
-            const filtered = services.filter(service => service.category === category);
-            setFilteredServices(filtered); 
-        } else {
-            setFilteredServices(services); 
-        }
+        const filtered = services.filter(service => service.category === category);
+        setFilteredServices(filtered); 
     };
 
     const handleServiceCreated = (newService) => {
@@ -71,7 +69,7 @@ const ServiceListings = () => {
     return (
         <div className="service-listing-container">
             <h1>Available Services</h1>
-            <ServiceCategoryFilter categories={categories} onCategorySelect={handleCategorySelect} />
+            <ServiceCategoryFilter categories={[]} onCategorySelect={handleCategorySelect} />
             <CreateService onServiceCreated={handleServiceCreated} userType={userType} /> {/* Pass userType prop */}
             <SearchBar onSearch={handleSearch} />
             <div className="service-card-container">

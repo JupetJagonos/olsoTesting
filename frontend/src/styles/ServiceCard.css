@@ -1,69 +1,111 @@
-/* ServiceCard.css */
 .service-card {
-    width: 300px; /* Specify the width of the card */
-    height: 200px; /* Specify the height of the card */
-    border-radius: 10px;
-    padding: 15px;
-    color: white; /* Text color */
-    position: relative;
-    overflow: hidden; /* Ensure children fit within */
-    display: flex; /* Use flexbox for alignment */
+    position: relative; /* For positioning elements like overlay */
+    display: flex; /* Use flex to center content */
     flex-direction: column; /* Stack items vertically */
-    background-size: cover; /* Cover the area with the image */
-    background-position: center; /* Center the image */
-    justify-content: flex-start; /* Align items at the top */
+    width: 320px; /* Adjust the width to match your desired layout */
+    height: 240px; /* Fixed height for uniformity */
+    border-radius: 10px; /* Rounded corners for a softer look */
+    padding: 15px; /* Inner padding */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    background-color: var(--bg-200); /* Bone color */
+    transition: transform 0.3s ease; /* Smooth transition on hover */
+    overflow: hidden; /* Prevent overflow of child elements */
 }
 
+/* Overlay for additional content */
 .overlay {
-    position: absolute; /* Position overlay absolutely */
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5); /* Darken background for readability */
-    display: flex; /* Flex to center content */
-    flex-direction: column; /* Stack items vertically */
-    justify-content: center; /* Center content vertically */
-    align-items: flex-start; /* Align items to the left */
+    position: absolute; 
+    left: 0; 
+    right: 0; 
+    top: 0;  
+    bottom: 0; 
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay for text visibility */
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-around; 
+    align-items: flex-start; 
     opacity: 0; /* Hidden by default */
-    transition: opacity 0.3s ease; /* Smooth transition for visibility */
+    transition: opacity 0.3s ease; /* Smooth opacity transition */
+    padding: 10px; /* Padding for overlay content */
+    box-sizing: border-box; /* Include padding in width/height */
 }
 
+/* Show overlay on hover */
 .service-card:hover .overlay {
-    opacity: 1; /* Show overlay on hover */
+    opacity: 1; /* Display overlay when hovering over the card */
 }
 
 .card-title {
-    color: var(--primary-200); /* Match the color from .nav-item */
-    font-family: "Helvetica Neue-Bold", Helvetica;
-    font-size: 24px;
-    font-weight: 700;
-    margin: 0; /* Remove default margin */
-    padding-bottom: 2px; /* Adjust space below title */
+    color: var(--accent-100); /* Floral White color for title */
+    font-family: "Helvetica Neue-Bold", Helvetica; /* Font family */
+    font-size: 24px; /* Title font size */
+    font-weight: 700; /* Bold weight */
+    margin: 0; /* Remove any default margin */
 }
 
-.card-description {
-    color: var(--primary-200); /* Match the color from .nav-item */
-    font-family: "Helvetica Neue-Regular", Helvetica;
-    font-size: 12px;
-    font-weight: 400;
-    margin: 2px 0; /* Thinner margin for closer line spacing */
-}
-
-.card-category {
-    color: var(--primary-200); /* Match the color from .nav-item */
-    font-family: "Helvetica Neue-Bold", Helvetica;
-    font-size: 14px; /* Slightly smaller font size for category */
-    margin: 2px 0; /* Thinner margin for closer line spacing */
-    font-weight: 700;
+.card-description,
+.card-category,
+.card-provider,
+.card-price {
+    color: var(--accent-100); /* Uniform text color for descriptions */
+    font-family: "Helvetica Neue-Regular", Helvetica; /* Font family */
+    font-size: 14px; /* Font size for description */
+    font-weight: 400; /* Normal weight */
+    margin: 2px 0; /* Thinner margin for spacing */
 }
 
 .button {
-    margin-top: 10px; /* Space between button and content above */
-    background-color: var(--primary-200); /* Optional background color for the button */
-    color: white; /* Button text color */
-    border: none; /* Remove border */
-    border-radius: 5px; /* Rounded corners for the button */
+    margin-top: 10px; /* Space between button and the content above */
+    background-color: var(--primary-200); /* Background color for button */
+    color: var(--accent-100); /* Text color for button */
     padding: 10px; /* Button padding */
-    cursor: pointer; /* Pointer cursor on hover */
+    border-radius: 5px; /* Rounded corners */
+    border: none; /* Remove border */
+    cursor: pointer; /* Changes cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth transition for button */
+    font-size: 14px; /* Consistent font size */
+    font-family: "Helvetica Neue-Bold", Helvetica; /* Font family for button text */
+}
+
+/* Button hover effects */
+.button:hover {
+    background-color: var(--primary-100); /* Change background color on hover */
+    color: var(--accent-200); /* Optionally adjust hover text color */
+}
+
+/* Optional styling for Disabled Button State */
+.button:disabled {
+    background-color: gray; /* Disabled color for the button */
+    cursor: not-allowed; /* Change cursor to indicate disabled state */
+}
+
+.overlay {
+    position: absolute; 
+    left: 0; 
+    right: 0; 
+    top: 0;  
+    bottom: 0; 
+    background: rgba(0, 0, 0, 0.7); /* Dark semi-transparent overlay */
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; /* Center overlay content vertically */
+    align-items: center; /* Center overlay content horizontally */
+    padding: 20px; /* Padding for overlay */
+    color: white; /* Text color in overlay */
+}
+
+/* Close button styling */
+.close-button {
+    position: absolute; /* Position in the top right corner */
+    top: 10px; 
+    right: 10px; 
+    background: none; /* No background for button */
+    color: var(--accent-100); /* Use floral white color */
+    border: none; /* No border */
+    font-size: 18px; /* Size for the close button */
+    cursor: pointer; /* Pointer cursor */
+}
+
+.close-button:hover {
+    color: var(--primary-100); /* Change color on hover for visibility */
 }
