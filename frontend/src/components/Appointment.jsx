@@ -33,7 +33,7 @@ const Appointments = () => {
         <div>
             <h2>Your Appointments</h2>
             <ul>
-                {appointments.map(appointment => (
+                {appointments.map((appointment) => (
                     <li key={appointment._id}>
                         {appointment.service.title} on {new Date(appointment.date).toLocaleString()}
                     </li>

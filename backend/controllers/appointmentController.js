@@ -1,21 +1,36 @@
 const Appointment = require('../models/Appointment');
+const Service = require('../models/Service'); // Ensure the Service model is imported
 
-// Create an Appointment
+// Create a new appointment
 const createAppointment = async (req, res) => {
-    const { serviceId, hours, date, time } = req.body; // Expecting these fields from the request
-    const userId = req.user.id; // Get user ID from JWT token
+    const { serviceId, hours, date, time } = req.body;
+    const userId = req.user.id; // Assume user ID is attached to the request via middleware
+
+    // Check for required fields
+    if (!serviceId || !hours || !date || !time) {
+        return res.status(400).json({ message: 'All fields are required.' });
+    }
 
     try {
+        // Fetch the service to get the provider ID
+        const service = await Service.findById(serviceId);
+        if (!service) {
+            return res.status(404).json({ message: 'Service not found.' });
+        }
+
+        const providerId = service.provider; // Get the provider ID from the service
+
         const appointment = new Appointment({
             user: userId,
             service: serviceId,
-            hours: hours,
-            date: new Date(date), // Ensure date is properly formatted
-            time: time,
-            status: 'Pending', // Default status for new appointment
+            hours: Number(hours),
+            date: new Date(date), // Use the appropriate date creation based on your requirements
+            time,
+            status: 'Pending', // Set the initial status of the appointment
+            provider: providerId, // Set the provider from the service
         });
 
-        await appointment.save(); // Save appointment to the database
+        await appointment.save(); // Save the appointment in the database
         return res.status(201).json(appointment); // Respond with the created appointment
     } catch (error) {
         console.error('Error creating appointment:', error);
@@ -23,88 +38,94 @@ const createAppointment = async (req, res) => {
     }
 };
 
-// Get User Appointments
-const getUserAppointments = async (req, res) => {
-    const userId = req.user.id; // Get user ID from JWT token
-
-    try {
-        const appointments = await Appointment.find({ user: userId })
-            .populate('service') // Populate the service details
-            .lean();
-        return res.status(200).json(appointments); // Return list of user appointments
-    } catch (error) {
-        console.error('Error fetching appointments:', error);
-        return res.status(500).json({ message: 'Server error', error: error.message });
-    }
-};
-
-// Update Booking Status
-const updateBookingStatus = async (req, res) => {
-    const { status } = req.body; // New status from request body
-    const { id } = req.params; // Appointment ID from URL params
-
-    try {
-        const updatedAppointment = await Appointment.findByIdAndUpdate(
-            id,
-            { status }, // Update status
-            { new: true } // Return the updated document
-        );
-
-        if (!updatedAppointment) {
-            return res.status(404).json({ message: 'Appointment not found' });
-        }
-
-        return res.status(200).json(updatedAppointment);
-    } catch (error) {
-        console.error('Error updating booking status:', error);
-        return res.status(500).json({ message: 'Server error', error: error.message });
-    }
-};
-
-
-// Get Upcoming Bookings for Provider
+// Get upcoming bookings for provider
 const getUpcomingBookingsForProvider = async (req, res) => {
-    const providerId = req.user.id; // Capture the provider ID from JWT
+    const providerId = req.user.id; // The authenticated provider ID
 
     try {
-        const bookings = await Appointment.find({
+        const upcomingBookings = await Appointment.find({
+            provider : providerId, // Filter by provider
+            date: { $gte: new Date() }, // Fetch future bookings
+        })
+        .populate('user', 'name email') // Populate client details
+        .populate('service') // Populate service details
+        .lean();
+
+        console.log('Upcoming Bookings for Provider:', upcomingBookings); // Debugging log
+        return res.status(200).json(upcomingBookings);
+    } catch (error) {
+        console.error('Error fetching upcoming bookings for provider:', error);
+        return res.status(500).json({ message: 'Server error', error: error.message });
+    }
+};
+
+// Get upcoming bookings for client
+const getUpcomingBookingsForClient = async (req, res) => {
+    const userId = req.user.id; // The authenticated client ID
+
+    try {
+        const upcomingBookings = await Appointment.find({
+            user: userId, // Filter by client
             date: { $gte: new Date() }, // Fetch future bookings
         })
         .populate('service') // Populate service details
-        .populate('user', 'name') // Optionally populate user field
         .lean();
 
-        const upcomingBookings = bookings.filter(booking => booking.service.provider.toString() === providerId);
-        return res.status(200).json(upcomingBookings); // Send the response
+        console.log('Upcoming Bookings for Client:', upcomingBookings); // Debugging log
+        return res.status(200).json(upcomingBookings);
     } catch (error) {
-        console.error('Error fetching upcoming bookings:', error);
+        console.error('Error fetching upcoming bookings for client:', error);
         return res.status(500).json({ message: 'Server error', error: error.message });
     }
 };
 
+// Get recent bookings for provider
 const getRecentBookingsForProvider = async (req, res) => {
-    const providerId = req.user.id; // Get the provider ID from the authenticated user
+    const providerId = req.user.id; // The authenticated provider ID
 
     try {
-        const bookings = await Appointment.find({
-            user: providerId,
-            status: 'Confirmed', // Only get confirmed bookings
-            date: { $lt: new Date() }, // Ensure it's completed bookings
+        const recentBookings = await Appointment.find({
+            'service.provider': providerId, // Filter by provider
+            date: { $lt: new Date() }, // Fetch past bookings
+            status: 'Completed', // Only get confirmed bookings
         })
+        .populate('user', 'name email') // Populate client details
         .populate('service') // Populate service details
         .lean();
 
-        return res.status(200).json(bookings); // Return recent completed bookings
+        console.log('Recent Bookings for Provider:', recentBookings); // Debugging log
+        return res.status(200).json(recentBookings);
     } catch (error) {
         console.error('Error fetching recent bookings for provider:', error);
         return res.status(500).json({ message: 'Server error', error: error.message });
     }
 };
 
+// Get recent bookings for client
+const getRecentBookingsForClient = async (req, res) => {
+    const userId = req.user.id; // The authenticated client ID
+
+    try {
+        const recentBookings = await Appointment.find({
+            user: userId, // Filter by client
+            date: { $lt: new Date() }, // Fetch past bookings
+            status: 'Completed', // Only get confirmed bookings
+        })
+        .populate('service') // Populate service details
+        .lean();
+
+        console.log('Recent Bookings for Client:', recentBookings); // Debugging log
+        return res.status(200).json(recentBookings);
+    } catch (error) {
+        console.error('Error fetching recent bookings for client:', error);
+        return res.status(500).json({ message: 'Server error', error: error.message });
+    }
+};
+
 module.exports = {
     createAppointment,
-    getUserAppointments,
-    updateBookingStatus,
     getUpcomingBookingsForProvider,
-    getRecentBookingsForProvider
+    getRecentBookingsForProvider,
+    getUpcomingBookingsForClient,
+    getRecentBookingsForClient,
 };
