@@ -7,9 +7,6 @@ const {
     bookService,
     viewAppointments,
     updateProfile,
-    getUserActivities, // Should be used for fetching recent activities
-    getUpcomingBookings, // For fetching upcoming bookings
-    getRecentBookingsForProvider // This will fetch recent completed bookings for providers
 } = require('../controllers/userController'); 
 const auth = require('../middleware/auth'); // Import the auth middleware
 
@@ -33,12 +30,7 @@ router.post('/book', auth(['Client']), bookService);
 // View User's Appointments
 router.get('/appointments', auth(['Client', 'Provider']), viewAppointments);
 
-// Get User Activities (Recent Activities)
-router.get('/activities', auth(['Client', 'Provider']), getUserActivities);
-
-// Get Upcoming Bookings
-router.get('/upcoming-bookings', auth(['Client', 'Provider']), getUpcomingBookings); // Ensure this is available
-
-router.get('/recent-bookings', auth(['Provider']), getRecentBookingsForProvider);
+// Update User Profile
+router.put('/profile', auth(['Client', 'Provider']), updateProfile);
 
 module.exports = router; // Export router
