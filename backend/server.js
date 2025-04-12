@@ -19,6 +19,7 @@ const serviceRoutes = require('./routes/serviceRoutes');
 const appointmentRoutes = require('./routes/appointmentRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+// const activityRoutes = require('./routes/activityRoutes'); // Import activity routes
 const errorHandler = require('./middleware/errorHandler'); // Custom error handling middleware
 
 const app = express(); // Create an Express application
@@ -38,6 +39,7 @@ app.use('/api/services', serviceRoutes); // Service related routes
 app.use('/api/appointments', appointmentRoutes); // Appointment related routes
 app.use('/api/reviews', reviewRoutes); // Review related routes
 app.use('/api/admin', adminRoutes); // Admin related routes
+// app.use('/api/activity', activityRoutes); // Activity related routes
 
 // Error Handling Middleware
 app.use(errorHandler); // Use this for handling errors across your API

@@ -2,9 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const Service = require('../models/Service');
-const Appointment = require('../models/Appointment'); // Import Appointment model
-const Activity = require('../models/Activity'); // Import Activity model
-const Booking = require('../models/Booking'); // Import Booking model (add this line)
+const Appointment = require('../models/Appointment');
 
 // User Registration
 const registerUser = async (req, res) => {
@@ -129,55 +127,6 @@ const updateProfile = async (req, res) => {
     }
 };
 
-// Function to fetch user activities (recent activities)
-const getUserActivities = async (req, res) => {
-    const userId = req.user.id; // Get user ID from token
-
-    try {
-        const activities = await Appointment.find({ user: userId }).populate('service').lean();
-        const completedActivities = activities.filter(activity => activity.status === 'Completed'); // Filter for "Completed"
-        
-        return res.status(200).json(completedActivities); // Return filtered activities
-    } catch (error) {
-        console.error('Error fetching user activities:', error);
-        return res.status(500).json({ message: 'Server error' });
-    }
-};
-
-
-// New function for fetching upcoming bookings
-const getUpcomingBookings = async (req, res) => {
-    const userId = req.user.id; // Get the user ID from the authenticated request
-
-    try {
-        const bookings = await Booking.find({ user: userId, status: 'upcoming' }) // Fetch upcoming bookings
-            .populate('service'); // Populate service information if needed
-
-        res.json(bookings); // Send the bookings as a JSON response
-    } catch (error) {
-        console.error('Error fetching upcoming bookings:', error);
-        res.status(500).json({ message: 'Server error' });
-    }
-};
-
-// Function to fetch recent bookings for providers
-const getRecentBookingsForProvider = async (req, res) => {
-    const providerId = req.user.id; // Get provider ID from the authenticated user
-
-    try {
-        const bookings = await Appointment.find({
-            provider: providerId,
-            status: 'Completed', // Get only completed bookings
-            date: { $lt: new Date() }, // Ensure it's past the current date
-        }).populate('service').lean();
-        
-        return res.status(200).json(bookings); // Return completed bookings
-    } catch (error) {
-        console.error('Error fetching recent bookings:', error);
-        return res.status(500).json({ message: 'Server error' });
-    }
-};
-
 // Exporting the user controller functions
 module.exports = {
     registerUser,
@@ -187,7 +136,4 @@ module.exports = {
     bookService,  
     viewAppointments,
     updateProfile,
-    getUserActivities,
-    getUpcomingBookings,
-    getRecentBookingsForProvider, 
 };
