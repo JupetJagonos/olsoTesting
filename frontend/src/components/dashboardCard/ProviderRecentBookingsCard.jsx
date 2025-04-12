@@ -2,22 +2,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const RecentBookingsCard = ({ recentBookings }) => {
+const ProviderRecentBookingsCard = ({ recentBookings }) => {
     const currentDate = new Date();
 
-    // Filter for completed bookings that are in the past
-    const completedRecentBookings = recentBookings.filter(booking => 
+    const completedRecentBookings = recentBookings.filter(booking =>
         new Date(booking.date) < currentDate && booking.status === 'Completed'
     );
 
     return (
         <div className="card">
-            <h2>ari client Recent Bookings</h2>
+            <h2>RecentBookings sang prov</h2>
             <div className="activities-grid">
                 {completedRecentBookings.length > 0 ? (
                     completedRecentBookings.map(booking => (
                         <div className="booking-card" key={booking._id}>
-                            <h4>Service: {booking.service ? booking.service.title : 'Service details not available'}</h4>
+                            <h4>User: {booking.user ? booking.user.name : 'Unnamed Client'}</h4>
+                            <p>Service: {booking.service ? booking.service.title : 'Service details not available'}</p>
                             <p>Date: {new Date(booking.date).toLocaleString()}</p>
                             <p>Status: {booking.status}</p>
                         </div>
@@ -30,11 +30,13 @@ const RecentBookingsCard = ({ recentBookings }) => {
     );
 };
 
-// Prop types definition remains the same
-RecentBookingsCard.propTypes = {
+ProviderRecentBookingsCard.propTypes = {
     recentBookings: PropTypes.arrayOf(
         PropTypes.shape({
             _id: PropTypes.string.isRequired,
+            user: PropTypes.shape({
+                name: PropTypes.string,
+            }),
             service: PropTypes.shape({
                 title: PropTypes.string,
             }),
@@ -44,4 +46,4 @@ RecentBookingsCard.propTypes = {
     ).isRequired,
 };
 
-export default RecentBookingsCard;
+export default ProviderRecentBookingsCard;
