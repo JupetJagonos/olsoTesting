@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import BookService from './BookService'; 
 import '../styles/ServiceCard.css';
+import services from '../api/ServiceData'; // Import your services array
 
 const ServiceCard = ({ service }) => {
     const [isBooking, setIsBooking] = useState(false);
@@ -16,8 +17,15 @@ const ServiceCard = ({ service }) => {
         setIsBooking(false); // Close overlay
     };
 
+    // Find the background image based on the service category
+    const categoryService = services.find(srv => srv.category === service.category);
+    const imageUrl = categoryService ? categoryService.image : ''; // Safeguard for image URL
+
     return (
-        <div className="service-card">
+        <div 
+            className="service-card" 
+            style={{ backgroundImage: `url(${imageUrl})`, backgroundSize: 'cover', backgroundPosition: 'center' }} // Set background image
+        >
             <div className="card-content">
                 <h2 className="card-title">{service.title}</h2>
                 <p className="card-description">{service.description}</p>
