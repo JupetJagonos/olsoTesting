@@ -21,52 +21,52 @@ const Dashboard = () => {
     // Use useCallback to memoize fetchData function
     const fetchData = useCallback(async () => {
         const token = localStorage.getItem('token');
-        
+
         try {
             // Fetch user profile
             const userProfileResponse = await axios.get('http://localhost:5001/api/users/profile', {
                 headers: { Authorization: `Bearer ${token}` },
             });
             setUserData(userProfileResponse.data);
-    
+
             // Fetch suggested services
             const servicesResponse = await axios.get('http://localhost:5001/api/services', {
                 headers: { Authorization: `Bearer ${token}` },
             });
-            
+
             const shuffledServices = servicesResponse.data.sort(() => 0.5 - Math.random()).slice(0, 3);
             setSuggestedServices(shuffledServices);
-    
+
             // Conditional fetching of bookings based on user type
+            let upcomingResponse, recentResponse;
+
             if (userType === 'Provider') {
-                const upcomingResponse = await axios.get('http://localhost:5001/api/appointments/provider/upcoming', {
+                upcomingResponse = await axios.get('http://localhost:5001/api/appointments/provider/upcoming', {
                     headers: { Authorization: `Bearer ${token}` },
                 });
-                const recentResponse = await axios.get('http://localhost:5001/api/appointments/provider/recent', {
+                recentResponse = await axios.get('http://localhost:5001/api/appointments/provider/recent', {
                     headers: { Authorization: `Bearer ${token}` },
                 });
-                setUpcomingBookings(upcomingResponse.data);
-                setRecentBookings(recentResponse.data);
             } else if (userType === 'Client') {
-                const clientUpcomingResponse = await axios.get('http://localhost:5001/api/appointments/client/upcoming', {
+                upcomingResponse = await axios.get('http://localhost:5001/api/appointments/client/upcoming', {
                     headers: { Authorization: `Bearer ${token}` },
                 });
-                const clientRecentResponse = await axios.get('http://localhost:5001/api/appointments/client/recent', {
+                recentResponse = await axios.get('http://localhost:5001/api/appointments/client/recent', {
                     headers: { Authorization: `Bearer ${token}` },
                 });
-                setUpcomingBookings(clientUpcomingResponse.data); 
-                setRecentBookings(clientRecentResponse.data);
             }
+            setUpcomingBookings(upcomingResponse.data);
+            setRecentBookings(recentResponse.data);
         } catch (error) {
             console.error('Error fetching data:', error);
         } finally {
             setLoading(false);
         }
-    }, [userType]); // Add userType to dependencies to re-fetch if it changes
+    }, [userType]);
 
     useEffect(() => {
         fetchData(); // Call fetchData when the component mounts
-    }, [fetchData]); // Add fetchData to the dependency array
+    }, [fetchData]);
 
     // Function to update booking status
     const updateBookingStatus = async (bookingId, newStatus) => {
@@ -75,7 +75,6 @@ const Dashboard = () => {
             await axios.put(`http://localhost:5001/api/appointments/${bookingId}/status`, { status: newStatus }, {
                 headers: { Authorization: `Bearer ${token}` },
             });
-            // Refresh bookings after update
             fetchData(); // Refresh the displayed data
         } catch (error) {
             console.error('Error updating booking status:', error);
@@ -85,47 +84,36 @@ const Dashboard = () => {
     if (loading) return <div>Loading dashboard...</div>;
 
     return (
-        <div className="dashboard-container">
+        <div className="dashboard-container frosted-glass">
             <h1>{userType === 'Client' ? 'Client Dashboard' : 'Provider Dashboard'}</h1>
 
             {/* Profile Card */}
-            <div className="profile-card card">
-                <ProfileCard userData={userData} />
-            </div>
+            <ProfileCard userData={userData} />
 
-            <div className="Services">
-                <div className="activities-bookings-section">
-                    <h2>Bookings</h2>
-                    <div className="bookings-row">
-                        {userType === 'Provider' ? (
-                            <>
-                                <div className="booking-container">
-                                    <ProviderUpcomingBookingsCard 
-                                        upcomingBookings={upcomingBookings} 
-                                        onUpdateStatus={updateBookingStatus} // Pass update function
-                                        />
-                                         </div>
-                                <div className="booking-container">
-                                    <ProviderRecentBookingsCard 
-                                        recentBookings={recentBookings} 
-                                    />
-                                </div>
-                            </>
-                        ) : (
-                            <>
-                                <div className="booking-container">
-                                    <UpcomingBookingsCard 
-                                        upcomingBookings={upcomingBookings} 
-                                    />
-                                </div>
-                                <div className="booking-container">
-                                    <RecentBookingsCard 
-                                        recentBookings={recentBookings} 
-                                    />
-                                </div>
-                            </>
-                        )}
-                    </div>
+            {/* Booking Section */}
+            <div className="activities-bookings-section">
+                <h2>Bookings</h2>
+                <div className="bookings-row">
+                    {userType === 'Provider' ? (
+                        <>
+                            <ProviderUpcomingBookingsCard 
+                                upcomingBookings={upcomingBookings} 
+                                onUpdateStatus={updateBookingStatus} 
+                            />
+                            <ProviderRecentBookingsCard 
+                                recentBookings={recentBookings} 
+                            />
+                        </>
+                    ) : (
+                        <>
+                            <UpcomingBookingsCard 
+                                upcomingBookings={upcomingBookings} 
+                            />
+                           <RecentBookingsCard 
+                                recentBookings={recentBookings} 
+                            />
+                        </>
+                    )}
                 </div>
             </div>
 
@@ -140,9 +128,11 @@ const Dashboard = () => {
                             return prevServices;
                         });
                     }}
-                    userType={userType} // Ensure userType is passed to CreateService
+                    userType={userType}
                 />
             )}
+
+            {/* Suggested Services */}
             <SuggestedServicesCard suggestedServices={suggestedServices} />
         </div>
     );

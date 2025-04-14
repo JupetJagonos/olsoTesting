@@ -6,16 +6,25 @@
     --accent-200: #0E1617; /* Leather */
     --text-100: #565449; /* Olive Drab for text */
     --text-200: #4B4B4B; /* Dark Gray */
-    --bg-100: #FFFBF4; /* Floral White */
-    --bg-200: #D8CFBC; /* Bone */
+    --bg-100: rgba(255, 255, 255, 0.4); /* Frosted background for the dashboard */
+    --bg-200: rgba(255, 255, 255, 0.6); /* Semi-transparent white for cards */
     --bg-300: #7C7C77; /* Palo Santo */
+}
+
+.frosted-glass {
+    background-color: rgba(255, 255, 255, 0.4); /* Frosted background */
+    border-radius: 15px; /* Rounded corners */
+    backdrop-filter: blur(10px); /* Apply blur effect */
+    box-shadow: 0 4px 40px rgba(0, 0, 0, 0.5); /* Increased shadow for depth */
+    padding: 50px; /* Padding inside the card */
+    margin-bottom: 20px; /* Space below each card */
 }
 
 .dashboard-container {
     max-width: 1397px; /* Set a maximum width for the container */
     margin: auto; /* Center the container */
     padding: 40px; /* Padding around the content */
-    background-color: var(--bg-100); /* Floral White */
+    background-color: var(--bg-100); /* Frosted background effect */
     border-radius: 25px; /* Rounded corners */
     color: var(--text-100); /* Olive Drab for text */
     margin-top: 50px; /* Space at the top */
@@ -23,43 +32,89 @@
     display: flex; 
     flex-direction: column;
     align-items: stretch;
+    overflow: hidden; /* Prevent internal scrolling */
 }
 
-/* General card styling */
-.card {
+
+.card-profile{
     border-radius: 15px; /* Rounded corners */
-    background-color: var(--bg-200); /* Bone */
+    background-color: var(--bg-200); /* Semi-transparent white */
     padding: 20px; /* Padding inside cards */
     margin-bottom: 20px; /* Space below each card */
-    min-height: 200px; /* Minimum height for consistency */
-    max-height: 400px; /* Maximum height to prevent overflow issues */
-    overflow: auto; /* Allow scrolling if content overflows */
+    min-height: 120px; /* Minimum height for consistency to fit content */
+    overflow: visible; /* Allow full content visibility */
+}
+
+
+.activities-bookings-section, .card {
+    border-radius: 15px; /* Rounded corners */
+    background-color: var(--bg-200); /* Semi-transparent white */
+    padding: 20px; /* Padding inside cards */
+    margin-bottom: 20px; /* Space below each card */
+    min-height: 450px; /* Minimum height for consistency to fit content */
+    overflow: visible; /* Allow full content visibility */
 }
 
 /* Services container */
 .Services {
-    flex: 1;
-    width: 100%; /* Ensure Services takes full width of the parent container */
-    display: flex;
+    flex: 1; 
+    width: 100%; /* Full width of parent */ 
+    display: flex; 
     flex-direction: column; 
-    gap: 30px;
-    overflow: hidden; /* Prevent scrolling on Services */
+    gap: 30px; /* Space between services */
     border-radius: 25px; /* Rounded corners */
-    background-color: var(--bg-200); /* Bone for matching background */
+    background-color: var(--bg-200); /* Background from the updated value */
 }
+
+.suggested-services {
+    width: 100%; /* Full width of the container */
+    margin: 20px 0; /* Space above and below */
+}
+
+.services-grid {
+    display: flex; /* Use flexbox for layout */
+    flex-wrap: wrap; /* Allow wrapping of columns */
+    justify-content: center; /* Center the items in the row */
+    gap: 20px; /* Space between service cards */
+}
+
+/* Adjust each service card to take up a third of the width */
+.service-card {
+    flex: 0 1 calc(33.333% - 20px); /* Three cards per row with gap adjustment */
+    box-sizing: border-box; /* Include padding in width calculation */
+    min-width: 320px; /* Ensure a minimum width for smaller screens */
+}
+
+.suggested-services {
+    width: 100%; /* Full width of the container */
+    margin: 20px 0; /* Space above and below */
+}
+
+.services-grid {
+    display: flex; /* Use flexbox for layout */
+    flex-wrap: wrap; /* Allow wrapping to next line */
+    justify-content: space-between; /* Space the items evenly */
+}
+
+/* Each service card should take 1/3 of the row while allowing for spacing */
+.service-card {
+    flex: 0 1 calc(33.333% - 20px); /* Three cards per row with gap adjusted */
+    box-sizing: border-box; /* Include padding and border in width calculations */
+    margin-bottom: 20px; /* Space below each card */
+}
+
 
 /* Section for bookings and activities */
 .activities-bookings-section {
-    width: 100%; /* Full width inside the Services container */
     padding: 20px; /* Padding inside the section */
-    background-color: var(--bg-200); /* Floral White for contrast */
-    margin: 20px 0; /* Top and bottom margin */
+    background-color: var(--bg-200); /* Semi-transparent white */
+    margin: 20px 0; /* Space below */
     display: flex; /* Use flexbox to arrange items */
     flex-direction: column; /* Stack headings above cards */
     gap: 20px; /* Space between sections */
 }
 
-.bookings-row, .activities-row {
+.bookings-row {
     display: flex; /* Use flexbox to align items side by side */
     justify-content: center; /* Center cards within the row */
     gap: 20px; /* Space between items */
@@ -67,43 +122,73 @@
 
 .booking-container, .activity-container {
     flex: 1; /* Allow containers to grow and shrink */
-    flex-basis: 0; /* Ensure that they can shrink when needed */
     max-width: 400px; /* Limit the maximum width of cards */
     padding: 15px; /* Padding inside each container */
     border-radius: 10px; /* Rounded corners */
-    background-color: var(--accent-100); /* Floral White for cards */
+    background-color: rgba(255, 255, 255, 0.6); /* Frosted background for individual bookings/activities */
     margin-right: 10px; /* Space between cards */
-    min-height: 200px; /* Minimum height for consistency */
-    max-height: 400px; /* Maximum height for overflow management */
-    overflow: hidden; /* Hide overflow from the container */
+    min-height: 250px; /* Minimum height for consistency */
 }
 
-/* Inner content container to allow scrolling */
-.booking-container-content, .activity-container-content {
-    height: 100%; /* Use full height of the parent */
-    overflow: auto; /* Allow scrolling for content that overflows */
+/* Booking card styling */
+.booking-card {
+    border-radius: 10px; /* Rounded corners for individual booking cards */
+    background-color: rgba(255, 255, 255, 0.7); /* White background for contrast */
+    padding: 20px; /* Padding for the booking content */
+    margin-bottom: 20px; /* Space below the booking card */
+    display: flex; /* Flexbox for vertical alignment */
+    flex-direction: column; /* Stack content vertically */
+    min-height: 250px; /* Increased minimum height for consistency */
 }
 
-.booking-container:last-child, .activity-container:last-child {
-    margin-right: 0; /* Remove margin for the last container */
+.booking-card h4 {
+    font-size: 1.4rem; /* Increased font size for user name */
+    margin-bottom: 10px; /* Space below user name */
+}
+
+.booking-card p {
+    font-size: 1rem; /* Increased font size for paragraphs */
+    margin-bottom: 5px; /* Space below paragraphs */
+}
+
+/* Button styles */
+.carousel-controls {
+    display: flex; /* Use flexbox for positioning buttons */
+    justify-content: space-between; /* Space buttons evenly */
+    margin-top: 20px; /* Space above buttons */
+}
+
+.carousel-controls button {
+    padding: 10px 15px; /* Padding for better button appearance */
+    background-color: var(--accent-100); /* Button background color */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Slight rounding for buttons */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    font-size: 1rem; /* Font size for button text */
+    color: rgb(0, 0, 0); /* Text color for buttons */
+}
+
+.carousel-controls button:disabled {
+    background-color: gray; /* Style for disabled buttons */
+    cursor: not-allowed; /* Change cursor for disabled state */
 }
 
 /* Heading styles */
-h2, h3, .booking-container h3, .activity-container h3 {
+h2, h3 {
     color: var(--primary-100); /* Olive Drab for headings */
     margin-bottom: 15px; /* Space below headings */
     font-size: 1.5rem; /* Adjusted for better visibility */
+}
+
+.booking-container h4, .activity-container h4 {
+    font-size: 1rem; /* Adjusted size for sub-headings */
+    margin: 10px 0; /* Margin for sub-headings */
 }
 
 /* Adjust text sizes within cards */
 .booking-container p, .activity-container p {
     font-size: 0.85rem; /* Smaller font size for content */
     margin: 5px 0; /* Consistent margin on paragraphs */
-}
-
-.booking-container h4, .activity-container h4 {
-    font-size: 1rem; /* Adjusted size for sub-headings */
-    margin: 10px 0; /* Margin for sub-headings */
 }
 
 /* Media queries for responsiveness */
@@ -113,8 +198,8 @@ h2, h3, .booking-container h3, .activity-container h3 {
         flex-direction: column; /* Stack items vertically on smaller screens */
     }
 
-    .Services {
-        padding: 10px; /* Reduce padding for smaller screens */
+    .dashboard-container {
+        padding: 20px; /* Reduce padding from the dashboard container for smaller screens */
     }
 
     .card {
@@ -128,4 +213,9 @@ h2, h3, .booking-container h3, .activity-container h3 {
     .booking-container p, .activity-container p {
         font-size: 0.75rem; /* Smaller font size for mobile viewing */
     }
+
+    .booking-card h4 {
+        font-size: 1.2rem; /* Adjusted font size for user name on smaller screens */
+    }
 }
+
