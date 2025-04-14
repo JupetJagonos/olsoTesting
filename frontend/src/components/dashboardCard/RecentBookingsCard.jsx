@@ -12,7 +12,7 @@ const RecentBookingsCard = ({ recentBookings }) => {
 
     return (
         <div className="card">
-            <h2>ari client Recent Bookings</h2>
+            <h2>Recent Bookings</h2>
             <div className="activities-grid">
                 {completedRecentBookings.length > 0 ? (
                     completedRecentBookings.map(booking => (
