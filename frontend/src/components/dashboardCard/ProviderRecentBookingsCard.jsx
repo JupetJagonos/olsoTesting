@@ -10,9 +10,9 @@ const ProviderRecentBookingsCard = ({ recentBookings }) => {
     );
 
     return (
-        <div className="card">
-            <h2>RecentBookings sang prov</h2>
-            <div className="activities-grid">
+        <div className="card frosted-glass">
+            <h2>Recent Bookings</h2>
+            <div className="activity-grid"> {/* Changed to activity-grid */}
                 {completedRecentBookings.length > 0 ? (
                     completedRecentBookings.map(booking => (
                         <div className="booking-card" key={booking._id}>
@@ -23,7 +23,9 @@ const ProviderRecentBookingsCard = ({ recentBookings }) => {
                         </div>
                     ))
                 ) : (
-                    <p>No recent bookings.</p>
+                    <div className="booking-card"> {/* Keep same structure */}
+                        <p>No recent bookings.</p>
+                    </div>
                 )}
             </div>
         </div>
