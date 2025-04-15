@@ -5,6 +5,7 @@ const {
     getRecentBookingsForProvider,
     getUpcomingBookingsForClient,
     getRecentBookingsForClient,
+    updateAppointmentStatus,
 } = require('../controllers/appointmentController');
 const auth = require('../middleware/auth');
 
@@ -16,5 +17,6 @@ router.get('/provider/upcoming', auth(['Provider']), getUpcomingBookingsForProvi
 router.get('/provider/recent', auth(['Provider']), getRecentBookingsForProvider);
 router.get('/client/upcoming', auth(['Client']), getUpcomingBookingsForClient);
 router.get('/client/recent', auth(['Client']), getRecentBookingsForClient);
+router.put('/status', auth(['Provider']), updateAppointmentStatus);
 
 module.exports = router;

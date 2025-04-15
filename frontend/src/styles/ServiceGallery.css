@@ -11,65 +11,31 @@
     --bg-300: #7C7C77; /* Palo Santo */
 }
 
-.service-card {
-    width: 300px; /* Width of the card */
-    height: 200px; /* Height of the card */
-    border-radius: 10px; /* Rounded corners */
-    padding: 15px; /* Inner padding */
-    color: white; /* Text color */
-    position: relative; /* Position for overlay control */
-    overflow: hidden; /* Ensure children fit within */
-    display: flex; /* Use flexbox for alignment */
-    flex-direction: column; /* Stack items vertically */
-    background-size: cover; /* Cover the area with the image */
-    background-position: center; /* Center the image */
-    justify-content: flex-start; /* Align items at the top */
-    transition: transform 0.3s ease; /* Smooth scale transform on hover */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
-}
-
-.overlay {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
-    opacity: 0; /* Hidden by default */
-    transition: opacity 0.3s ease; /* Smooth opacity transition */
-    padding: 10px;
-    box-sizing: border-box; /* Include padding in width/height */
-}
-
-.service-card-container {
+/* Updated container for landscape cards */
+.landscape-card-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Set to a 3-column layout */
-    gap: 10px; /* Reduced space between cards (change from 20px to smaller value like 10px or less) */
-    justify-items: center; /* Center the cards within each grid cell */
-    align-items: start; /* Align to the start at the top */
+    grid-template-columns: repeat(3, 1fr); /* Three columns */
+    gap: 10px; /* Space between cards */
+    justify-items: center; /* Center cards */
+    align-items: start; /* Align to start */
     padding: 20px; /* Padding around the container */
-    margin: 0 auto; /* Center the grid container on the page */
-    max-width: 100%; /* Set a max width for responsiveness */
+    margin: 0 auto; /* Center the container */
+    max-width: 80%; /* Adjust as needed */
 }
 
-/* Card styling for service category */
-.card {
+/* Card styling for a landscape aspect ratio */
+.landscape-card {
     background-color: var(--bg-200); /* Assign Bone color */
     border-radius: 10px; /* Rounded corners */
     overflow: hidden; /* Prevent overflow of child elements */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
-    height: 180px; /* Fixed height */
-    width: 360px; /* Fixed width */
+    height: 200px; /* Fixed height */
+    width: 300px; /* Fixed width for 3:2 ratio */
     position: relative; /* For absolute positioning of text */
     transition: transform 0.2s ease-in-out; /* Smooth transition on hover */
 }
 
-
-/* No need for .img class since images will be used as background */
+/* Other styles remain unchanged */
 .textBox {
     position: absolute; /* Position text absolutely */
     top: 50%; /* Center vertically */
@@ -85,13 +51,29 @@
     transition: opacity 0.2s ease-in-out; /* Smooth transition */
 }
 
+/* New class for description */
+.service-description {
+    color: var(--accent-100); /* Text color (Floral White) */
+    z-index: 2; /* Ensure it appears above the image */
+    text-align: center; /* Center text within the box */
+    font-weight: normal; /* Regular weight for description */
+    font-size: 1em; /* Font size for description */
+    text-transform: none; /* Remove uppercase transformation */
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.2s ease-in-out; /* Smooth transition */
+}
+
 /* Display effect on card hover */
-.card:hover {
+.landscape-card:hover {
     transform: scale(1.05); /* Scale up on hover */
 }
 
-.card:hover .textBox {
+.landscape-card:hover .textBox {
     opacity: 1; /* Show text box on hover */
+}
+
+.landscape-card:hover .service-description {
+    opacity: 1; /* Show description on hover */
 }
 
 /* Headline styling for category names */
@@ -138,4 +120,19 @@ h1 {
     color: red; /* Error message color */
     margin-bottom: 10px; /* Bottom margin for error messages */
     text-align: center; /* Center error messages */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .landscape-card {
+        width: 80vw; /* Use a percentage for responsiveness */
+        height: calc(80vw * 2 / 3); /* Maintain 3:2 ratio */
+    }
+}
+
+@media (max-width: 480px) {
+    .landscape-card {
+        width: 90vw; /* Full width on small screens */
+        height: calc(90vw * 2 / 3); /* Maintain 3:2 ratio */
+    }
 }

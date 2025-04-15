@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
-import PropTypes from 'prop-types'; // Import PropTypes for props validation
+import PropTypes from 'prop-types'; // Import PropTypes for props validation 
 
 const ServiceCategoryFilter = ({ categories, onCategorySelect }) => {
     return (
