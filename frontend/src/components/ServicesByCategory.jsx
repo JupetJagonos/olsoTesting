@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import services from '../api/ServiceData'; // Import your service data
 import ServiceCard from '../components/ServiceCard';
 
+
 const ServiceByCategory = () => {
     const { category } = useParams(); // Fetch category from URL parameters
     const filteredServices = services.filter(service => service.category === category);

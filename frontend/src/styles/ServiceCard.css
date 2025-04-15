@@ -4,196 +4,162 @@
     --primary-300: #D8CFBC; /* Bone */
     --accent-100: #FFFBF4; /* Floral White */
     --accent-200: #0E1617; /* Leather */
-    --text-100: #565449; /* Olive Drab for text */
+    --text-100: #7C7C77; /* Palo Santo */
     --text-200: #4B4B4B; /* Dark Gray */
-    --bg-100: rgba(255, 255, 255, 0.4); /* Frosted background for the dashboard */
-    --bg-200: rgba(255, 255, 255, 0.6); /* Semi-transparent white for cards */
+    --bg-100: #FFFBF4; /* Floral White */
+    --bg-200: #D8CFBC; /* Bone */
     --bg-300: #7C7C77; /* Palo Santo */
 }
 
-.frosted-glass {
-    background-color: rgba(255, 255, 255, 0.4); /* Frosted background */
-    border-radius: 15px; /* Rounded corners */
-    backdrop-filter: blur(10px); /* Apply blur effect */
-    box-shadow: 0 4px 40px rgba(0, 0, 0, 0.5); /* Increased shadow for depth */
-    padding: 50px; /* Padding inside the card */
-    margin-bottom: 20px; /* Space below each card */
+/* Container for service cards with grid layout */
+.service-card-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three columns */
+    gap: 20px; /* Increased space between cards */
+    justify-items: center; /* Center cards within each grid cell */
+    align-items: start; /* Align to start */
+    padding: 20px; /* Padding around the container */
+    margin: 0 auto; /* Center the container */
+    max-width: 95%; /* Limit to 95% width of the container */
 }
-
-.dashboard-container {
-    max-width: 1397px; /* Set a maximum width for the container */
-    margin: auto; /* Center the container */
-    padding: 40px; /* Padding around the content */
-    background-color: var(--bg-100); /* Frosted background effect */
-    border-radius: 25px; /* Rounded corners */
-    color: var(--text-100); /* Olive Drab for text */
-    margin-top: 50px; /* Space at the top */
-    margin-bottom: 50px; /* Space at the bottom */
-    display: flex; 
-    flex-direction: column;
-    align-items: stretch;
-    overflow: visible; /* Ensure child content isn't clipped */
-}
-
-/* Adjusted card styles */
-.card,
-.card-profile,
-.activities-bookings-section {
-    border-radius: 15px; /* Rounded corners */
-    background-color: var(--bg-200); /* Semi-transparent white */
-    padding: 20px; /* Padding inside cards */
-    margin-bottom: 20px; /* Space below each card */
-    min-height: 250px; /* Minimum height for consistency to fit content */
-    overflow: visible; /* Allow full content visibility */
-}
-
-/* Suggested services grid */
-.suggested-services {
-    width: 100%; /* Full width of the container */
-}
-
-.services-grid {
-    display: flex; /* Flex container for services */
-    flex-wrap: wrap; /* Allow wrapping to next line */
-    justify-content: center; /* Center the items */
-    gap: 20px; /* Space between service cards */
-}
-
-/* Each service card can have a fixed width */
+/* Updated container for landscape cards */
 .service-card {
-    position: relative; /* For positioning elements like overlay */
-    display: flex; /* Use flex to center content */
-    flex-direction: column; /* Stack items vertically */
-    width: calc(33.33% - 20px); /* Three cards per row with gap adjustment */
-    min-height: 240px; /* Fixed height for uniformity */
-    border-radius: 10px; /* Rounded corners for a softer look */
-    padding: 15px; /* Inner padding */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Shadow effect */
-    background-color: var(--bg-200); /* Bone color */
-    transition: transform 0.3s ease; /* Smooth transition on hover */
+    background-color: var(--bg-200); /* Assign Bone color */
+    border-radius: 10px; /* Rounded corners */
     overflow: hidden; /* Prevent overflow of child elements */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    height: auto; /* Allow height to adjust based on content */
+    width: 300px; /* Fixed width for 3:2 ratio */
+    position: relative; /* For absolute positioning of text */
+    transition: transform 0.2s ease-in-out; /* Smooth transition on hover */
+    padding: 20px; /* Padding to avoid content sticking to edges */
 }
 
-/* Ensuring flex items fit well with increased padding */
 .card-content {
-    position: relative; /* Ensure content is positioned within the card */
-    z-index: 1; /* Ensure content stays above the background image */
+    display: flex;
+    flex-direction: column; /* Column layout for the card content */
+    justify-content: space-between; /* Space out content */
 }
 
-.overlay {
-    position: absolute; 
-    left: 0; 
-    right: 0; 
-    top: 0;  
-    bottom: 0; 
-    background: rgba(0, 0, 0, 0.7); /* Dark semi-transparent overlay */
-    display: flex; 
-    flex-direction: column; 
-    justify-content: center; /* Center overlay content vertically */
-    align-items: center; /* Center overlay content horizontally */
-    opacity: 0; /* Hidden by default */
-    transition: opacity 0.3s ease; /* Smooth opacity transition */
-    padding: 10px; /* Padding for overlay content */
-    box-sizing: border-box; /* Include padding in width/height */
-    z-index: 2; /* Ensure overlay is above other content */
+/* Text Box Styling */
+.textBox {
+    position: absolute; /* Position text absolutely */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust to center */
+    color: var(--accent-100); /* Text color (Floral White) */
+    z-index: 2; /* Ensure it appears above the image */
+    text-align: center; /* Center text within the box */
+    font-weight: bold; /* Make text bold */
+    font-size: 1em; /* Font size for text */
+    text-transform: uppercase; /* Uppercase text for emphasis */
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.2s ease-in-out; /* Smooth transition */
 }
 
-/* Show overlay when hovering over the card */
-.service-card:hover .overlay {
-    opacity: 1; /* Display overlay when hovering over the card */
+/* New class for description */
+.service-description {
+    color: var(--accent-100); /* Text color (Floral White) */
+    z-index: 2; /* Ensure it appears above the image */
+    text-align: center; /* Center text within the box */
+    font-weight: normal; /* Regular weight for description */
+    font-size: 1em; /* Font size for description */
+    text-transform: none; /* Remove uppercase transformation */
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.2s ease-in-out; /* Smooth transition */
 }
-
-/* Card Title Styles */
 .card-title {
-    color: var(--accent-100); /* Floral White color for title */
-    font-family: "Helvetica Neue-Bold", Helvetica; /* Font family */
-    font-size: 24px; /* Title font size */
-    font-weight: 700; /* Bold weight */
-    margin: 0; /* Remove any default margin */
+    margin: 0; /* Reset margin */
 }
 
-/* Description and Other Text Styles */
+/* Display effect on card hover */
+.service-card:hover {
+    transform: scale(1.05); /* Scale up on hover */
+}
+
+.service-card:hover .textBox,
+.service-card:hover .service-description {
+    opacity: 1; /* Show text box and description on hover */
+}
+
+
+/* Headline styling for category names */
+.head {
+    font-weight: bold;
+    font-size: 1.2em; /* Larger font for category names */
+    text-transform: uppercase; /* Uppercase text */
+    font-family: 'Helvetica', sans-serif; /* Use Helvetica font */
+}
+
+/* This section will retain styles for registration forms and buttons, etc. */
+.registration-container {
+    max-width: 400px; /* Width for registration forms */
+    margin: 100px auto; /* Center forms */
+    padding: 50px; /* Padding around forms */
+    background-color: #171717; /* Background for forms */
+    border-radius: 25px; /* Rounded corners */
+    box-shadow: 15px 15px 30px rgba(66, 63, 63, 0.3); /* Shadow effect */
+}
+h1 {
+    text-align: center; /* Center alignment for headings */
+    margin-bottom: 20px; /* Spacing below headings */
+    color: white; /* Heading color */
+}
+
+
+h1 {
+    text-align: center; /* Center alignment for headings */
+    margin-bottom: 20px; /* Spacing below headings */
+    color: white; /* Heading color */
+}
+/* Button styling */
+.button2 {
+    padding: 10px 20px; /* Button padding */
+    border-radius: 5px; /* Rounded corners */
+    border: none; /* Remove border */
+    outline: none; /* No outline */
+    background-color: #252525; /* Button background */
+    color: white; /* Button text color */
+    transition: 0.4s ease-in-out; /* Transition for hover effect */
+gap: 10px;
+}
+
+.button2:hover {
+    background-color: black; /* Button hover effect */
+}
+
+/* Error message styling */
+.error {
+    color: red; /* Error message color */
+    margin-bottom: 10px; /* Bottom margin for error messages */
+    text-align: center; /* Center error messages */
+}
 .card-description,
 .card-category,
 .card-provider,
 .card-price {
-    color: var(--accent-100); /* Uniform text color for descriptions */
-    font-family: "Helvetica Neue-Regular", Helvetica; /* Font family */
-    font-size: 14px; /* Font size for description */
-    font-weight: 400; /* Normal weight */
-    margin: 2px 0; /* Thinner margin for spacing */
+    margin: 5px 0; /* Add spacing between each item */
 }
 
-/* Button Styles */
-.button {
-    margin-top: 10px; /* Space between button and the content above */
-    background-color: var(--primary-200); /* Background color for button */
-    color: var(--accent-100); /* Text color for button */
-    padding: 10px; /* Button padding */
-    border-radius: 5px; /* Rounded corners */
-    border: none; /* Remove border */
-    cursor: pointer; /* Changes cursor on hover */
-    transition: background-color 0.3s ease; /* Smooth transition for button */
-    font-size: 14px; /* Consistent font size */
-    font-family: "Helvetica Neue-Bold", Helvetica; /* Font family for button text */
-}
-
-/* Button hover effects */
-.button:hover {
-    background-color: var(--primary-100); /* Change background color on hover */
-    color: var(--accent-200); /* Optionally adjust hover text color */
-}
-
-/* Optional styling for disabled button state */
-.button:disabled {
-    background-color: gray; /* Disabled color for the button */
-    cursor: not-allowed; /* Change cursor to indicate disabled state */
-}
-
-/* Close button styling */
-.close-button {
-    position: absolute; /* Position in the top right corner */
-    top: 10px; /* Space from the top */
-    right: 10px; /* Space from the right */
-    background: none; /* No background for button */
-    color: var(--accent-100); /* Use floral white color */
-    border: none; /* No border */
-    font-size: 18px; /* Size for the close button */
-    cursor: pointer; /* Pointer cursor */
-    z-index: 3; /* Ensure the close button is above the overlay */
-}
-
-.close-button:hover {
-    color: var(--primary-100); /* Change color on hover for visibility */
-}
-
-/* Optional styling for the overlay elements */
-.overlay p {
-    color: white; /* Text color in overlay for readability */
-    margin: 5px 0; /* Spacing for overlay text */
-}
-
-/* Additional styling adjustments for responsive design */
+/* Responsive Design */
 @media (max-width: 768px) {
     .service-card {
-        width: 100%; /* Full width on smaller screens */
-        height: auto; /* Allow height to grow based on content */
-        max-height: none; /* Let it grow as needed */
+        width: 80vw; /* Use a percentage for responsiveness */
+        height: calc(80vw * 2 / 3); /* Maintain 3:2 ratio */
     }
 
-    .card-title, .button {
-        font-size: 16px; /* Adjust font size for mobile */
-    }
-
-    .card-description,
-    .card-category,
-    .card-provider,
-    .card-price {
-        font-size: 12px; /* Adjust description text for mobile */
-    }
-
-    .close-button {
-        font-size: 16px; /* Smaller close button on mobile */
+    .service-card-container {
+        grid-template-columns: repeat(2, 1fr); /* Two columns on smaller screens */
     }
 }
 
+@media (max-width: 480px) {
+    .service-card {
+        width: 90vw; /* Full width on small screens */
+        height: calc(90vw * 2 / 3); /* Maintain 3:2 ratio */
+    }
+
+    .service-card-container {
+        grid-template-columns: 1fr; /* Single column layout on extra small screens */
+    }
+}
