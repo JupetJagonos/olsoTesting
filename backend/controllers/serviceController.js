@@ -44,21 +44,28 @@ const getProviderServices = async (req, res) => {
     }
 };
 
-// Update the details of a service
+
+
 const updateService = async (req, res) => {
     const serviceId = req.params.id; // Get the service ID from the request parameters
+    const { title, description, price, category } = req.body; // Destructure updated details
 
     try {
-        // Find the service by ID and update it with the new data
-        const service = await Service.findByIdAndUpdate(serviceId, req.body, { new: true });
-        if (!service) {
+        const updatedService = await Service.findByIdAndUpdate(serviceId, {
+            title,
+            description,
+            price,
+            category
+        }, { new: true }); // Return the updated service
+
+        if (!updatedService) {
             return res.status(404).json({ message: 'Service not found' });
         }
-
-        res.status(200).json(service); // Respond with the updated service
+        
+        res.status(200).json(updatedService); // Respond with the updated service
     } catch (error) {
         console.error('Error updating service:', error);
-        res.status(500).json({ message: 'Server error' }); // Handle internal server errors
+        res.status(500).json({ message: 'Server error' });
     }
 };
 
@@ -74,9 +81,29 @@ const getAllServices = async (req, res) => {
     }
 };
 
+// Delete Service
+const deleteService = async (req, res) => {
+    const serviceId = req.params.id; // Get the service ID from the request parameters
+
+    try {
+        const deletedService = await Service.findByIdAndDelete(serviceId);
+        
+        if (!deletedService) {
+            return res.status(404).json({ message: 'Service not found' });
+        }
+
+        res.status(200).json({ message: 'Service deleted successfully' }); // Success response
+    } catch (error) {
+        console.error('Error deleting service:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+
 module.exports = {
     createService,
     getProviderServices,
     updateService,
     getAllServices,
-}; // Export all functions 
+    deleteService, 
+}; 

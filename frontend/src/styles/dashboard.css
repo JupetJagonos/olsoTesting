@@ -90,11 +90,6 @@
     margin: 20px 0; /* Space above and below */
 }
 
-.services-grid {
-    display: flex; /* Use flexbox for layout */
-    flex-wrap: wrap; /* Allow wrapping to next line */
-    justify-content: space-between; /* Space the items evenly */
-}
 
 /* Each service card should take 1/3 of the row while allowing for spacing */
 .service-card {

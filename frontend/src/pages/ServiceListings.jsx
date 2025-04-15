@@ -9,11 +9,12 @@ import CreateService from './CreateService';
 import '../styles/ServiceGallery.css'; 
 
 const ServiceListings = () => {
-    const { state } = useLocation(); // Get the passed state
+    const { state } = useLocation(); // Get the passed state (if any)
     const selectedCategory = state ? state.selectedCategory : null; // Extract selected category
 
     const [services, setServices] = useState([]); 
     const [filteredServices, setFilteredServices] = useState([]);
+    const [categories, setCategories] = useState([]); // State for available categories
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
@@ -23,8 +24,12 @@ const ServiceListings = () => {
         const fetchServices = async () => {
             try {
                 const response = await axios.get('http://localhost:5001/api/services');
-                setServices(response.data); 
+                setServices(response.data);
                 setFilteredServices(response.data); 
+                
+                // Extract unique categories from the service data
+                const uniqueCategories = [...new Set(response.data.map(service => service.category))];
+                setCategories(uniqueCategories); // Set categories state
             } catch (err) {
                 console.error('Error fetching services:', err);
                 setError('Failed to load services.'); 
@@ -37,14 +42,13 @@ const ServiceListings = () => {
     }, []);
 
     useEffect(() => {
-        // Filter services based on the selected category
         if (selectedCategory) {
             const filtered = services.filter(service => service.category === selectedCategory);
             setFilteredServices(filtered);
         } else {
             setFilteredServices(services); // Reset to default if no category is selected
         }
-    }, [selectedCategory, services]); // Dependency on services and selected category
+    }, [selectedCategory, services]); // Dependencies on services and selected category
 
     const handleSearch = (query) => {
         const filtered = services.filter(service =>
@@ -59,8 +63,26 @@ const ServiceListings = () => {
     };
 
     const handleServiceCreated = (newService) => {
-        setServices(prevServices => [...prevServices, newService]);
-        setFilteredServices(prevFiltered => [...prevFiltered, newService]);
+        setServices((prevServices) => [...prevServices, newService]);
+        setFilteredServices((prevFiltered) => [...prevFiltered, newService]);
+    };
+
+    const handleServiceUpdated = (updatedService) => {
+        setServices((prevServices) =>
+            prevServices.map(service =>
+                service._id === updatedService._id ? updatedService : service
+            )
+        );
+        setFilteredServices((prevFiltered) =>
+            prevFiltered.map(service =>
+                service._id === updatedService._id ? updatedService : service
+            )
+        );
+    };
+
+    const handleServiceDeleted = (serviceId) => {
+        setServices((prevServices) => prevServices.filter(service => service._id !== serviceId));
+        setFilteredServices((prevFiltered) => prevFiltered.filter(service => service._id !== serviceId));
     };
 
     if (loading) return <div>Loading services...</div>; 
@@ -69,17 +91,32 @@ const ServiceListings = () => {
     return (
         <div className="service-listing-container">
             <h1>Available Services</h1>
-            <ServiceCategoryFilter categories={[]} onCategorySelect={handleCategorySelect} />
-            <CreateService onServiceCreated={handleServiceCreated} userType={userType} /> {/* Pass userType prop */}
+            <ServiceCategoryFilter 
+                categories={categories} // Pass populated categories here
+                onCategorySelect={handleCategorySelect} 
+            />
             <SearchBar onSearch={handleSearch} />
+           
             <div className="service-card-container">
                 {filteredServices.length > 0 ? (
                     filteredServices.map(service => (
-                        <ServiceCard key={service._id} service={service} />
+                        <ServiceCard 
+                            key={service._id} 
+                            service={service} 
+                            userType={userType}  // Pass the userType down to the ServiceCard
+                            onServiceUpdated={handleServiceUpdated} 
+                            onServiceDeleted={handleServiceDeleted}
+                        />
                     ))
                 ) : (
                     <p>No services available.</p>
                 )}
+            </div>
+            <div className="create-service-container"> {/* Added space for CreateService */}
+                <CreateService 
+                    onServiceCreated={handleServiceCreated} 
+                    userType={userType} 
+                />
             </div>
         </div>
     );

@@ -14,34 +14,38 @@ const ProviderUpcomingBookingsCard = ({ upcomingBookings, onUpdateStatus }) => {
         setCurrentIndex((prevIndex) => (prevIndex - 1 + upcomingBookings.length) % upcomingBookings.length);
     };
 
-    // Find the image for the current booking's service category
-    const currentService = upcomingBookings[currentIndex].service;
-    const categoryImage = services.find(service => service.category === currentService.category)?.image || ''; // Match by category
-
     return (
-        <div className="card frosted-glass"> {/* Add relevant class here */}
+        <div className="card frosted-glass">
             <h2>Upcoming Bookings</h2>
             {upcomingBookings.length > 0 ? (
-                <div 
-                    className="booking-card" 
-                    style={{ 
-                        backgroundImage: `url(${categoryImage})`, 
-                        backgroundSize: 'cover', 
-                        backgroundPosition: 'center' 
-                    }} // Set background image
-                >
-                    <h4>User: {upcomingBookings[currentIndex].user ? upcomingBookings[currentIndex].user.name : 'Unnamed Client'}</h4>
-                    <p>Service: {currentService ? currentService.title : 'Service details not available'}</p>
-                    <p>Category: {currentService ? currentService.category : 'No category available'}</p> {/* Added category */}
-                    <p>Date: {new Date(upcomingBookings[currentIndex].date).toLocaleString()}</p>
-                    <p>Time: {upcomingBookings[currentIndex].time}</p>
-                    <p>Hours: {upcomingBookings[currentIndex].hours}</p>
-                    <p>Status: {upcomingBookings[currentIndex].status}</p>
-                    <div>
-                        <button onClick={() => onUpdateStatus(upcomingBookings[currentIndex]._id, 'Confirmed')}>Confirm</button>
-                        <button onClick={() => onUpdateStatus(upcomingBookings[currentIndex]._id, 'Cancelled')}>Cancel</button>
-                    </div>
-                </div>
+                (() => {
+                    const currentBooking = upcomingBookings[currentIndex];
+                    const currentService = currentBooking.service || {}; // Safeguard for service
+                    const categoryImage = services.find(service => service.category === currentService.category)?.image || ''; // Match by category
+
+                    return (
+                        <div 
+                            className="booking-card" 
+                            style={{
+                                backgroundImage: `url(${categoryImage})`,
+                                backgroundSize: 'cover',
+                                backgroundPosition: 'center'
+                            }} // Set background image
+                        >
+                            <h4>User: {currentBooking.user ? currentBooking.user.name : 'Unnamed Client'}</h4>
+                            <p>Service: {currentService.title || 'Service details not available'}</p>
+                            <p>Category: {currentService.category || 'No category available'}</p>
+                            <p>Date: {new Date(currentBooking.date).toLocaleString()}</p>
+                            <p>Time: {currentBooking.time}</p>
+                            <p>Hours: {currentBooking.hours}</p>
+                            <p>Status: {currentBooking.status}</p>
+                            <div>
+                                <button onClick={() => onUpdateStatus(currentBooking._id, 'Confirmed')}>Confirm</button>
+                                <button onClick={() => onUpdateStatus(currentBooking._id, 'Cancelled')}>Cancel</button>
+                            </div>
+                        </div>
+                    );
+                })()
             ) : (
                 <p>No upcoming bookings.</p>
             )}
@@ -58,11 +62,11 @@ ProviderUpcomingBookingsCard.propTypes = {
         PropTypes.shape({
             _id: PropTypes.string.isRequired,
             user: PropTypes.shape({
-                name: PropTypes.string,
+                name: PropTypes.string.isRequired, // Assuming user has a name
             }),
             service: PropTypes.shape({
-                title: PropTypes.string,
-                category: PropTypes.string, // Ensure this is included
+                title: PropTypes.string.isRequired,
+                category: PropTypes.string.isRequired,
             }),
             date: PropTypes.string.isRequired,
             time: PropTypes.string.isRequired,

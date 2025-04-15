@@ -21,23 +21,33 @@ const Dashboard = () => {
     // Use useCallback to memoize fetchData function
     const fetchData = useCallback(async () => {
         const token = localStorage.getItem('token');
+        console.log("Fetching data with token: ", token);
+
+        if (!token) {
+            console.error("No token found. User might not be logged in.");
+            alert("You need to be logged in to view this data.");
+            setLoading(false);
+            return;
+        }
 
         try {
             // Fetch user profile
             const userProfileResponse = await axios.get('http://localhost:5001/api/users/profile', {
                 headers: { Authorization: `Bearer ${token}` },
             });
+            console.log("User Profile Response: ", userProfileResponse.data);
             setUserData(userProfileResponse.data);
 
             // Fetch suggested services
             const servicesResponse = await axios.get('http://localhost:5001/api/services', {
                 headers: { Authorization: `Bearer ${token}` },
             });
+            console.log("Suggested Services Response: ", servicesResponse.data);
 
             const shuffledServices = servicesResponse.data.sort(() => 0.5 - Math.random()).slice(0, 3);
             setSuggestedServices(shuffledServices);
 
-            // Conditional fetching of bookings based on user type
+            // Fetch bookings based on user type
             let upcomingResponse, recentResponse;
 
             if (userType === 'Provider') {
@@ -55,31 +65,37 @@ const Dashboard = () => {
                     headers: { Authorization: `Bearer ${token}` },
                 });
             }
+
+            console.log("Upcoming Bookings: ", upcomingResponse.data);
+            console.log("Recent Bookings: ", recentResponse.data);
+
             setUpcomingBookings(upcomingResponse.data);
             setRecentBookings(recentResponse.data);
         } catch (error) {
             console.error('Error fetching data:', error);
+            alert('An error occurred while fetching data. Check console for details.');
         } finally {
             setLoading(false);
         }
     }, [userType]);
 
-    useEffect(() => {
-        fetchData(); // Call fetchData when the component mounts
-    }, [fetchData]);
-
     // Function to update booking status
     const updateBookingStatus = async (bookingId, newStatus) => {
         const token = localStorage.getItem('token');
         try {
-            await axios.put(`http://localhost:5001/api/appointments/${bookingId}/status`, { status: newStatus }, {
+            await axios.put(`http://localhost:5001/api/appointments/status`, { id: bookingId, status: newStatus }, {
                 headers: { Authorization: `Bearer ${token}` },
             });
-            fetchData(); // Refresh the displayed data
+            fetchData(); // Refresh the displayed data after status update
         } catch (error) {
             console.error('Error updating booking status:', error);
+            alert('An error occurred while updating the booking status. Check console for details.');
         }
     };
+
+    useEffect(() => {
+        fetchData(); // Call fetchData when the component mounts
+    }, [fetchData]);
 
     if (loading) return <div>Loading dashboard...</div>;
 
@@ -109,7 +125,7 @@ const Dashboard = () => {
                             <UpcomingBookingsCard 
                                 upcomingBookings={upcomingBookings} 
                             />
-                           <RecentBookingsCard 
+                            <RecentBookingsCard 
                                 recentBookings={recentBookings} 
                             />
                         </>
