@@ -70,11 +70,24 @@ const updateService = async (req, res) => {
 };
 
 // Get all services
+// const getAllServices = async (req, res) => {
+//     try {
+//         const services = await Service.find()
+//             .populate('provider'); // Ensure you populate the provider details here
+//         res.status(200).json(services); // Send services back to the client
+//     } catch (error) {
+//         console.error('Error fetching services:', error);
+//         res.status(500).json({ message: 'Server error', error: error.message });
+//     }
+// };
+
 const getAllServices = async (req, res) => {
     try {
-        const services = await Service.find()
-            .populate('provider'); // Ensure you populate the provider details here
-        res.status(200).json(services); // Send services back to the client
+        const services = await Service.find().populate('provider'); // Populate provider details
+        if (services.length === 0) {
+            return res.status(404).json({ message: 'No services found.' });
+        }
+        res.status(200).json(services); // Return services for both clients and providers
     } catch (error) {
         console.error('Error fetching services:', error);
         res.status(500).json({ message: 'Server error', error: error.message });

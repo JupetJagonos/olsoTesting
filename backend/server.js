@@ -36,7 +36,8 @@ app.get("/", (req, res) => {
 
 // Route Definitions for the API
 app.use('/api/users', userRoutes); // User-related routes
-app.use('/api/services', auth(['Provider']), serviceRoutes); // Service-related routes with protection for providers
+// app.use('/api/services', auth(['Provider']), serviceRoutes); // Service-related routes with protection for providers
+app.use('/api/services', serviceRoutes); 
 app.use('/api/appointments', appointmentRoutes); // Appointment-related routes
 app.use('/api/reviews', reviewRoutes); // Review-related routes
 app.use('/api/admin', adminRoutes); // Admin-related routes
