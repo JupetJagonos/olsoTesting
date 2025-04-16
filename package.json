@@ -1,6 +1,9 @@
 {
     "name": "olso-capstone",
+    "version": "1.0.0",
+    "private": true,
     "scripts": {
-      "heroku-postbuild": "cd frontend && npm install && npm run build"
+      "heroku-postbuild": "cd frontend && npm install && npm run build",
+      "start": "npm start --prefix backend"
     }
   }
