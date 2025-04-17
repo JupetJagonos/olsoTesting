@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import '../styles/ServiceDetail.css';
+import api from '../api';
 
 const ServiceDetail = () => {
     const { id } = useParams(); // Obtain the service id from the URL parameters
@@ -13,7 +13,7 @@ const ServiceDetail = () => {
     useEffect(() => {
         const fetchServiceDetail = async () => {
             try {
-                const response = await axios.get(`http://localhost:5001/api/services/${id}`); // Make request to get service details
+                const response = await api.get(`/api/services/${id}`); // Make request to get service details
                 setService(response.data); // Set the service data
             } catch (err) {
                 console.error('Failed to load service details:', err);

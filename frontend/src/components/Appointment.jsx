@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
+import api from '../api';
 
 const Appointments = () => {
     const [appointments, setAppointments] = useState([]);
@@ -11,7 +12,7 @@ const Appointments = () => {
         const fetchAppointments = async () => {
             const token = localStorage.getItem('token');
             try {
-                const response = await axios.get('http://localhost:5001/api/users/appointments', {
+                const response = await api.get('/api/users/appointments', {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setAppointments(response.data);

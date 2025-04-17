@@ -1,8 +1,9 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
+
 import '../styles/createService.css'; // Import the created CSS file
+import api from '../api';
 
 const CreateService = ({ onServiceCreated, userType }) => {
     const [title, setTitle] = useState('');
@@ -31,7 +32,7 @@ const CreateService = ({ onServiceCreated, userType }) => {
 
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.post('http://localhost:5001/api/services', serviceData, {
+            const response = await api.post('/api/services', serviceData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

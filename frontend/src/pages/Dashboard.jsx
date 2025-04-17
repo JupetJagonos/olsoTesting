@@ -1,6 +1,5 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState, useCallback } from 'react';
-import axios from 'axios';
 import ProfileCard from '../components/dashboardCard/ProfileCard';
 import SuggestedServicesCard from '../components/dashboardCard/SuggestedServicesCard';
 import UpcomingBookingsCard from '../components/dashboardCard/UpcomingBookingsCard';
@@ -9,6 +8,7 @@ import ProviderUpcomingBookingsCard from '../components/dashboardCard/ProviderUp
 import ProviderRecentBookingsCard from '../components/dashboardCard/ProviderRecentBookingsCard';
 import CreateService from './CreateService';
 import '../styles/dashboard.css';
+import api from '../api';
 
 const Dashboard = () => {
     const [userData, setUserData] = useState(null);
@@ -32,14 +32,14 @@ const Dashboard = () => {
 
         try {
             // Fetch user profile
-            const userProfileResponse = await axios.get('http://localhost:5001/api/users/profile', {
+            const userProfileResponse = await api.get('/api/users/profile', {
                 headers: { Authorization: `Bearer ${token}` },
             });
             console.log("User Profile Response: ", userProfileResponse.data);
             setUserData(userProfileResponse.data);
 
             // Fetch suggested services
-            const servicesResponse = await axios.get('http://localhost:5001/api/services', {
+            const servicesResponse = await api.get('/api/services', {
                 headers: { Authorization: `Bearer ${token}` },
             });
             console.log("Suggested Services Response: ", servicesResponse.data);
@@ -51,17 +51,17 @@ const Dashboard = () => {
             let upcomingResponse, recentResponse;
 
             if (userType === 'Provider') {
-                upcomingResponse = await axios.get('http://localhost:5001/api/appointments/provider/upcoming', {
+                upcomingResponse = await api.get('/api/appointments/provider/upcoming', {
                     headers: { Authorization: `Bearer ${token}` },
                 });
-                recentResponse = await axios.get('http://localhost:5001/api/appointments/provider/recent', {
+                recentResponse = await api.get('/api/appointments/provider/recent', {
                     headers: { Authorization: `Bearer ${token}` },
                 });
             } else if (userType === 'Client') {
-                upcomingResponse = await axios.get('http://localhost:5001/api/appointments/client/upcoming', {
+                upcomingResponse = await api.get('/api/appointments/client/upcoming', {
                     headers: { Authorization: `Bearer ${token}` },
                 });
-                recentResponse = await axios.get('http://localhost:5001/api/appointments/client/recent', {
+                recentResponse = await api.get('/api/appointments/client/recent', {
                     headers: { Authorization: `Bearer ${token}` },
                 });
             }
@@ -83,7 +83,7 @@ const Dashboard = () => {
     const updateBookingStatus = async (bookingId, newStatus) => {
         const token = localStorage.getItem('token');
         try {
-            await axios.put(`http://localhost:5001/api/appointments/status`, { id: bookingId, status: newStatus }, {
+            await api.put(`/api/appointments/status`, { id: bookingId, status: newStatus }, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             fetchData(); // Refresh the displayed data after status update
