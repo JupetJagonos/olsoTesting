@@ -1,12 +1,13 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom'; // To access location
-import axios from 'axios'; 
+
 import ServiceCard from '../components/ServiceCard'; 
 import SearchBar from '../components/SearchBar'; 
 import ServiceCategoryFilter from '../components/ServiceCategoryFilter'; 
 import CreateService from './CreateService'; 
 import '../styles/ServiceGallery.css'; 
+import api from '../api';
 
 const ServiceListings = () => {
     const { state } = useLocation(); // Get the passed state (if any)
@@ -23,7 +24,7 @@ const ServiceListings = () => {
     useEffect(() => {
         const fetchServices = async () => {
             try {
-                const response = await axios.get('http://localhost:5001/api/services');
+                const response = await api.get('/api/services');
                 setServices(response.data);
                 setFilteredServices(response.data); 
                 

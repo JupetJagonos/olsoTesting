@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import '../styles/Registration.css';
+import api from '../api';
 
 const Login = () => {
     const [formData, setFormData] = useState({ email: '', password: '' });
@@ -25,7 +25,7 @@ const Login = () => {
         }
     
         try {
-            const response = await axios.post('http://localhost:5001/api/users/login', formData);
+            const response = await api.post('/api/users/login', formData);
             
             // Ensure we have token, userId, and userType in the response
             if (response.data && response.data.token) {

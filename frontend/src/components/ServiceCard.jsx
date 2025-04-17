@@ -1,10 +1,10 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
 import PropTypes from 'prop-types'; 
-import axios from 'axios'; // Import axios for API calls
 import '../styles/ServiceCard.css'; 
 import services from '../api/ServiceData'; // Import service images
 import BookService from './BookService'; // Import the BookService component
+import api from '../api';
 
 const ServiceCard = ({ service, userType, onServiceUpdated, onServiceDeleted }) => {
     const [isEditing, setIsEditing] = useState(false);
@@ -20,8 +20,8 @@ const ServiceCard = ({ service, userType, onServiceUpdated, onServiceDeleted }) 
     const handleUpdate = async () => {
         const token = localStorage.getItem('token');
         try {
-            const response = await axios.put(
-                `http://localhost:5001/api/services/${service._id}`, 
+            const response = await api.put(
+                `/api/services/${service._id}`, 
                 updatedService, 
                 {
                     headers: { Authorization: `Bearer ${token}` }
@@ -37,7 +37,7 @@ const ServiceCard = ({ service, userType, onServiceUpdated, onServiceDeleted }) 
     const handleDelete = async () => {
         const token = localStorage.getItem('token');
         try {
-            await axios.delete(`http://localhost:5001/api/services/${service._id}`, {
+            await api.delete(`/api/services/${service._id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             onServiceDeleted(service._id); // Call the parent handler to remove this service

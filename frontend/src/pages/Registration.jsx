@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; 
 import '../styles/Registration.css';
+import api from '../api';
 
 const Registration = () => {
     const [formData, setFormData] = useState({
@@ -22,7 +22,7 @@ const Registration = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5001/api/users/register', formData);
+            const response = await api.post('/api/users/register', formData);
             console.log('Registration Successful:', response.data);
             navigate('/login'); // Navigate to login after successful registration
         } catch (error) {

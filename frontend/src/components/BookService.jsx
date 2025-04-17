@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import '../styles/BookService.css';
+import api from '../api';
 
 const BookService = ({ service, hours, setHours }) => {
     const [date, setDate] = useState('');
@@ -32,8 +32,8 @@ const BookService = ({ service, hours, setHours }) => {
         };
 
         try {
-            const response = await axios.post(
-                'http://localhost:5001/api/appointments/bookings',
+            const response = await api.post(
+                '/api/appointments/bookings',
                 bookingData,
                 {
                     headers: {

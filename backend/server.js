@@ -2,51 +2,53 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const connectDB = require('./config/db'); // Function to connect to the database
-const auth = require('./middleware/auth'); // Ensure auth middleware is imported
+const path = require('path');
+const connectDB = require('./config/db');
+const auth = require('./middleware/auth');
+const errorHandler = require('./middleware/errorHandler');
 
-// Load environment variables from .env file
-dotenv.config(); 
+// Load environment variables
+dotenv.config();
 
 // Connect to MongoDB
 connectDB();
 
-// Check the JWT secret environment variable
-console.log('JWT_SECRET:', process.env.JWT_SECRET); 
+// Log JWT_SECRET for debugging
+console.log('JWT_SECRET:', process.env.JWT_SECRET);
 
-// Importing Routes
+// Import Routes
 const userRoutes = require('./routes/userRoutes');
 const serviceRoutes = require('./routes/serviceRoutes');
 const appointmentRoutes = require('./routes/appointmentRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
 const adminRoutes = require('./routes/adminRoutes');
-// const activityRoutes = require('./routes/activityRoutes'); // Optionally if you have activity routes
-const errorHandler = require('./middleware/errorHandler'); // Custom error handling middleware
 
-const app = express(); // Create an Express application
+const app = express();
 
-// Middleware setup
-app.use(cors()); // Enable Cross-Origin Resource Sharing
-app.use(express.json()); // Parse JSON request bodies
+// Middleware
+app.use(cors());
+app.use(express.json());
 
-// Basic test route to confirm server is running
-app.get("/", (req, res) => {
-    res.send("BACK END - OLSO"); 
+// Serve static files from the React frontend
+app.use(express.static(path.join(__dirname, '../frontend/build')));
+
+// API Routes
+app.use('/api/users', userRoutes);
+app.use('/api/services', serviceRoutes); // Add auth middleware if needed: auth(['Provider'])
+app.use('/api/appointments', appointmentRoutes);
+app.use('/api/reviews', reviewRoutes);
+app.use('/api/admin', adminRoutes);
+
+// Serve React app for non-API routes
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
 });
 
-// Route Definitions for the API
-app.use('/api/users', userRoutes); // User-related routes
-// app.use('/api/services', auth(['Provider']), serviceRoutes); // Service-related routes with protection for providers
-app.use('/api/services', serviceRoutes); 
-app.use('/api/appointments', appointmentRoutes); // Appointment-related routes
-app.use('/api/reviews', reviewRoutes); // Review-related routes
-app.use('/api/admin', adminRoutes); // Admin-related routes
-
 // Error Handling Middleware
-app.use(errorHandler); // Use this for handling errors across your API
+app.use(errorHandler);
 
-// Starting the server
-const PORT = process.env.PORT || 5001; // Set the port to use 
+// Start the server
+const PORT = process.env.PORT || 5001; // Align with proxy port
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`); // Log confirmation of server start
+    console.log(`Server is running on port ${PORT}`);
 });

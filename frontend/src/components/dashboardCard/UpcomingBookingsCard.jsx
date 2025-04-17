@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import services from '../../api/ServiceData'; // Ensure the path is correct
-import axios from 'axios'; // Import axios if making requests
+import api from '../../api';
 
 const UpcomingBookingsCard = ({ upcomingBookings, userType, onUpdateStatus }) => {
     const [currentIndex, setCurrentIndex] = useState(0); // State to manage current booking index
@@ -25,7 +25,7 @@ const UpcomingBookingsCard = ({ upcomingBookings, userType, onUpdateStatus }) =>
         if (!token) return; // Ensure user is logged in
 
         try {
-            await axios.put(`http://localhost:5001/api/appointments/${upcomingBookings[currentIndex]._id}/status`, {
+            await api.put(`/api/appointments/${upcomingBookings[currentIndex]._id}/status`, {
                 status: 'Cancelled'
             }, {
                 headers: {
