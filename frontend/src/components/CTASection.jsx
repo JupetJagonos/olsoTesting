@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/CTAstyle.css'; // Import the new CTA styles
+import '../styles/CTAStyle.css'; // Import the new CTA styles
 
 const CallToActionSection = () => {
   return (
