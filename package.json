@@ -1,14 +1,9 @@
 {
-    "name": "olso-capstone",
-    "version": "1.0.0",
-    "private": true,
-    "engines": {
-    "node": "20.17.0"  
-  },
-   "scripts": {
+  "scripts": {
     "start": "cd backend && node server.js",
-    "heroku-postbuild": "cd frontend && npm install && npm run build"
+    "heroku-postbuild": "cd backend && npm install && cd ../frontend && npm install && npm run build"
+  },
+  "engines": {
+    "node": "20.17.0"
   }
-
-
 }
