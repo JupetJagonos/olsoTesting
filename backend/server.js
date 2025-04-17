@@ -30,7 +30,7 @@ app.use(cors());
 app.use(express.json());
 
 // Serve static files from the React frontend
-app.use(express.static(path.join(__dirname, '../frontend/build')));
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
 // API Routes
 app.use('/api/users', userRoutes);
@@ -41,7 +41,7 @@ app.use('/api/admin', adminRoutes);
 
 // Serve React app for non-API routes
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
+    res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
 });
 
 // Error Handling Middleware
