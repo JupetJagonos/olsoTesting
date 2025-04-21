@@ -73,7 +73,6 @@ const Dashboard = () => {
             setRecentBookings(recentResponse.data);
         } catch (error) {
             console.error('Error fetching data:', error);
-            alert('An error occurred while fetching data. Check console for details.');
         } finally {
             setLoading(false);
         }

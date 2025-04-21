@@ -8,9 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
-  }, 
-
-   "devDependencies": {
+  },
+  "devDependencies": {
     "@eslint/js": "^9.21.0",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
@@ -20,11 +19,12 @@
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^15.15.0"
   },
-    "proxy": "http://localhost:5001",
+  "proxy": "http://localhost:5001",
   "dependencies": {
-
     "@relume_io/relume-ui": "^1.3.0",
-    "@vitejs/plugin-react": "^4.3.4", 
+    "@stripe/react-stripe-js": "^3.6.0",
+    "@stripe/stripe-js": "^7.1.0",
+    "@vitejs/plugin-react": "^4.3.4",
     "axios": "^1.8.1",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
@@ -32,7 +32,6 @@
     "react-icons": "^5.5.0",
     "react-masonry-css": "^1.0.16",
     "react-router-dom": "^7.2.0",
-    "vite": "^6.2.0" 
+    "vite": "^6.2.0"
   }
-
 }

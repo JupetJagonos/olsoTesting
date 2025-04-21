@@ -39,6 +39,7 @@ const ProviderUpcomingBookingsCard = ({ upcomingBookings, onUpdateStatus }) => {
                             <p>Time: {currentBooking.time}</p>
                             <p>Hours: {currentBooking.hours}</p>
                             <p>Status: {currentBooking.status}</p>
+                            <p>Payment: {currentBooking.paymentStatus}</p>
                             <div>
                                 <button onClick={() => onUpdateStatus(currentBooking._id, 'Confirmed')}>Confirm</button>
                                 <button onClick={() => onUpdateStatus(currentBooking._id, 'Cancelled')}>Cancel</button>
@@ -72,6 +73,7 @@ ProviderUpcomingBookingsCard.propTypes = {
             time: PropTypes.string.isRequired,
             hours: PropTypes.number.isRequired,
             status: PropTypes.string.isRequired,
+            paymentStatus: PropTypes.string.isRequired
         })
     ).isRequired,
     onUpdateStatus: PropTypes.func.isRequired,

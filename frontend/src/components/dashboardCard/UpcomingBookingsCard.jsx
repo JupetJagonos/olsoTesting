@@ -57,6 +57,7 @@ const UpcomingBookingsCard = ({ upcomingBookings, userType, onUpdateStatus }) =>
                     <p>Time: {upcomingBookings[currentIndex].time}</p>
                     <p>Hours: {upcomingBookings[currentIndex].hours}</p>
                     <p>Status: {upcomingBookings[currentIndex].status}</p>
+                    <p>Payment: {upcomingBookings[currentIndex].paymentStatus}</p>
 
                     {/* Show Cancel button only for clients */}
                     {userType === 'Client' && (
@@ -89,6 +90,7 @@ UpcomingBookingsCard.propTypes = {
             time: PropTypes.string.isRequired,
             hours: PropTypes.number.isRequired,
             status: PropTypes.string.isRequired,
+            paymentStatus: PropTypes.string.isRequired,
         })
     ).isRequired,
     userType: PropTypes.string.isRequired, // Ensures userType is provided
