@@ -36,7 +36,7 @@ const createAppointment = async (req, res) => {
             time,
             status: 'Pending',
             provider: providerId,
-            paymentStatus: 'completed',
+            paymentStatus: 'Completed',
             stripePaymentId: paymentIntentId,
             amount,
         });
